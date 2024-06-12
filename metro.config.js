@@ -1,9 +1,13 @@
-// Learn more https://docs.expo.io/guides/customizing-metro
+/* eslint-disable no-undef */
+const { withTamagui } = require('@tamagui/metro-plugin');
 const { getDefaultConfig } = require('expo/metro-config');
-const { withNativeWind } = require('nativewind/metro');
 
-/** @type {import('expo/metro-config').MetroConfig} */
-// eslint-disable-next-line no-undef
-const config = getDefaultConfig(__dirname);
+const config = getDefaultConfig(__dirname, {
+  isCSSEnabled: true,
+});
 
-module.exports = config;
+module.exports = withTamagui(config, {
+  components: ['tamagui'],
+  config: './tamagui.config.ts',
+  outputCSS: './tamagui-web.css',
+});

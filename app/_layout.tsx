@@ -1,37 +1,59 @@
-import { useFonts } from 'expo-font';
-import { SplashScreen, Stack } from 'expo-router';
-import React, { useEffect } from 'react';
-import { TamaguiProvider } from 'tamagui';
+import { useCallback } from 'react';
 
-import config from '../tamagui.config';
+import {
+  Montserrat_100Thin,
+  Montserrat_200ExtraLight,
+  Montserrat_300Light,
+  Montserrat_400Regular,
+  Montserrat_500Medium,
+  Montserrat_600SemiBold,
+  Montserrat_700Bold,
+  Montserrat_800ExtraBold,
+  Montserrat_900Black,
+  useFonts,
+} from '@expo-google-fonts/montserrat';
+
+import { initialWindowMetrics, SafeAreaProvider } from 'react-native-safe-area-context';
+
+import * as SplashScreen from 'expo-splash-screen';
+import { StatusBar } from 'expo-status-bar';
+
+import { TamaguiProvider, XStack } from 'tamagui';
+
+import config from '@/tamagui.config';
+import Router from '@/router';
 
 SplashScreen.preventAutoHideAsync();
 
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
-};
-
-export default function RootLayout() {
-  const [loaded] = useFonts({
-    Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
-    InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
+export default function App () {
+  const [fontsLoaded, fontError] = useFonts({
+    Montserrat_100Thin,
+    Montserrat_200ExtraLight,
+    Montserrat_300Light,
+    Montserrat_400Regular,
+    Montserrat_500Medium,
+    Montserrat_600SemiBold,
+    Montserrat_700Bold,
+    Montserrat_800ExtraBold,
+    Montserrat_900Black,
   });
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
     }
-  }, [loaded]);
+  }, [fontsLoaded, fontError]);
 
-  if (!loaded) return null;
+  if (!fontsLoaded) {
+    return <></>;
+  }
 
   return (
-    <TamaguiProvider config={config}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
+    <TamaguiProvider config={config} defaultTheme="light">
+      <StatusBar style="light" />
+      <SafeAreaProvider initialMetrics={initialWindowMetrics} onLayout={onLayoutRootView}>
+        <Router />
+      </SafeAreaProvider>
     </TamaguiProvider>
   );
-}
+};

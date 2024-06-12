@@ -2,10 +2,10 @@ import { StyleSheet, View } from 'react-native';
 
 import { Stack } from 'expo-router';
 
-export default function Home() {
+export default function Settings() {
   return (
     <>
-      <Stack.Screen options={{ title: 'TMR' }} />
+      <Stack.Screen options={{ title: 'Configurações' }} />
       <View style={styles.container} />
     </>
   );
