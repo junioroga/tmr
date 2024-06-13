@@ -69,6 +69,11 @@ const defaultFont = createFont({
     0.5: 0.5,
     0.75: 0.75,
     1: 1,
+    2: 2,
+    3: 3,
+    4: 4,
+    5: 5,
+    10: 10,
   },
   size: {
     1: getFontSize(10),
