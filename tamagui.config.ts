@@ -5,7 +5,8 @@ import { createAnimations } from '@tamagui/animations-moti'
 import { media } from '@tamagui/config'
 import { config as tamaguiConfig } from '@tamagui/config/v3'
 import { createMedia } from '@tamagui/react-native-media-driver'
-import { themes } from '@tamagui/themes'
+
+import { themes } from './utils/themes'
 
 const fontScale = PixelRatio.getFontScale()
 
@@ -102,14 +103,14 @@ const defaultFont = createFont({
   },
   face: {
     100: { normal: 'Montserrat_100Thin' },
-    200: { normal: 'Montserrat_100Thin_200ExtraLight' },
-    300: { normal: 'Montserrat_100Thin_300Light' },
-    400: { normal: 'Montserrat_100Thin_400Regular' },
-    500: { normal: 'Montserrat_100Thin_500Medium' },
-    600: { normal: 'Montserrat_100Thin_600SemiBold' },
-    700: { normal: 'Montserrat_100Thin_700Bold' },
-    800: { normal: 'Montserrat_100Thin_800ExtraBold' },
-    900: { normal: 'Montserrat_100Thin_900Black' },
+    200: { normal: 'Montserrat_200ExtraLight' },
+    300: { normal: 'Montserrat_300Light' },
+    400: { normal: 'Montserrat_400Regular' },
+    500: { normal: 'Montserrat_500Medium' },
+    600: { normal: 'Montserrat_600SemiBold' },
+    700: { normal: 'Montserrat_700Bold' },
+    800: { normal: 'Montserrat_800ExtraBold' },
+    900: { normal: 'Montserrat_900Black' },
   },
 })
 
@@ -124,17 +125,7 @@ const config = createTamagui({
     heading: defaultFont,
     body: defaultFont,
   },
-  themes: {
-    ...themes,
-    dark: {
-      ...themes.dark,
-      shadowColor: themes.dark.gray5,
-    },
-    light: {
-      ...themes.light,
-      shadowColor: themes.light.color10,
-    },
-  },
+  themes,
   media: customMedia,
 })
 
