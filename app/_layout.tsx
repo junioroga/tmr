@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback } from 'react'
 
 import {
   Montserrat_100Thin,
@@ -11,21 +11,21 @@ import {
   Montserrat_800ExtraBold,
   Montserrat_900Black,
   useFonts,
-} from '@expo-google-fonts/montserrat';
+} from '@expo-google-fonts/montserrat'
+import { initialWindowMetrics, SafeAreaProvider } from 'react-native-safe-area-context'
 
-import { initialWindowMetrics, SafeAreaProvider } from 'react-native-safe-area-context';
+import * as SplashScreen from 'expo-splash-screen'
+import { StatusBar } from 'expo-status-bar'
 
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
+import { TamaguiProvider } from 'tamagui'
 
-import { TamaguiProvider, XStack } from 'tamagui';
+import Router from '@/router'
 
-import config from '@/tamagui.config';
-import Router from '@/router';
+import config from '@/tamagui.config'
 
-SplashScreen.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync()
 
-export default function App () {
+export default function App() {
   const [fontsLoaded, fontError] = useFonts({
     Montserrat_100Thin,
     Montserrat_200ExtraLight,
@@ -36,16 +36,16 @@ export default function App () {
     Montserrat_700Bold,
     Montserrat_800ExtraBold,
     Montserrat_900Black,
-  });
+  })
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded || fontError) {
-      await SplashScreen.hideAsync();
+      await SplashScreen.hideAsync()
     }
-  }, [fontsLoaded, fontError]);
+  }, [fontsLoaded, fontError])
 
   if (!fontsLoaded) {
-    return <></>;
+    return <></>
   }
 
   return (
@@ -55,5 +55,5 @@ export default function App () {
         <Router />
       </SafeAreaProvider>
     </TamaguiProvider>
-  );
-};
+  )
+}

@@ -1,6 +1,6 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native'
 
-import { Stack } from 'expo-router';
+import { Stack } from 'expo-router'
 
 export default function Settings() {
   return (
@@ -8,7 +8,7 @@ export default function Settings() {
       <Stack.Screen options={{ title: 'Configurações' }} />
       <View style={styles.container} />
     </>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -16,4 +16,4 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
   },
-});
+})

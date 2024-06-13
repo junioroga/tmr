@@ -1,11 +1,11 @@
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { Stack } from 'expo-router';
+import { Stack } from 'expo-router'
 
-import { XStack } from 'tamagui';
+import { XStack } from 'tamagui'
 
 export default function Router() {
-  const insets = useSafeAreaInsets();
+  const insets = useSafeAreaInsets()
 
   return (
     <XStack f={1} bg="$background" pt={insets.top}>
@@ -13,5 +13,5 @@ export default function Router() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
     </XStack>
-  );
+  )
 }

@@ -1,15 +1,15 @@
-import { PixelRatio } from 'react-native';
+import { PixelRatio } from 'react-native'
 
-import { createFont, createTamagui } from 'tamagui';
-import { createAnimations } from '@tamagui/animations-moti';
-import { media } from '@tamagui/config';
-import { config as tamaguiConfig } from '@tamagui/config/v3';
-import { createMedia } from '@tamagui/react-native-media-driver';
-import { themes } from '@tamagui/themes';
+import { createFont, createTamagui } from 'tamagui'
+import { createAnimations } from '@tamagui/animations-moti'
+import { media } from '@tamagui/config'
+import { config as tamaguiConfig } from '@tamagui/config/v3'
+import { createMedia } from '@tamagui/react-native-media-driver'
+import { themes } from '@tamagui/themes'
 
-const fontScale = PixelRatio.getFontScale();
+const fontScale = PixelRatio.getFontScale()
 
-const getFontSize = (size: number) => size / fontScale;
+const getFontSize = (size: number) => size / fontScale
 
 const animations = createAnimations({
   fast: {
@@ -46,7 +46,7 @@ const animations = createAnimations({
     mass: 1.2,
     stiffness: 250,
   },
-});
+})
 
 const customMedia = createMedia({
   ...media,
@@ -59,7 +59,7 @@ const customMedia = createMedia({
   isNormalDesktop: { minWidth: 1025, maxWidth: 1440 },
   isWideDesktop: { minWidth: 1441 },
   isDesktop: { minWidth: 769 },
-});
+})
 
 const defaultFont = createFont({
   family: 'Montserrat',
@@ -111,7 +111,7 @@ const defaultFont = createFont({
     800: { normal: 'Montserrat_100Thin_800ExtraBold' },
     900: { normal: 'Montserrat_100Thin_900Black' },
   },
-});
+})
 
 const config = createTamagui({
   ...tamaguiConfig,
@@ -136,12 +136,12 @@ const config = createTamagui({
     },
   },
   media: customMedia,
-});
+})
 
-export type AppConfig = typeof config;
+export type AppConfig = typeof config
 
 declare module 'tamagui' {
   interface TamaguiCustomConfig extends AppConfig {}
 }
 
-export default config;
+export default config

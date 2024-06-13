@@ -1,4 +1,4 @@
-import { GetProps, Spinner, styled } from 'tamagui';
+import { GetProps, Spinner, styled } from 'tamagui'
 
 export const Loading = styled(Spinner, {
   name: 'Loading',
@@ -23,6 +23,6 @@ export const Loading = styled(Spinner, {
   defaultVariants: {
     variant: 'ghost',
   },
-});
+})
 
-export type LoadingProps = GetProps<typeof Loading>;
+export type LoadingProps = GetProps<typeof Loading>

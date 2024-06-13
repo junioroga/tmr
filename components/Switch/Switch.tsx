@@ -1,10 +1,10 @@
-import { GetProps, styled, Switch as TSwitch, withStaticProperties } from 'tamagui';
+import { GetProps, styled, Switch as TSwitch, withStaticProperties } from 'tamagui'
 
 const SwitchFrame = styled(TSwitch, {
   name: 'Switch',
   ai: 'center',
   size: '$3',
-});
+})
 
 const SwitchThumb = styled(TSwitch.Thumb, {
   name: 'SwitchThumb',
@@ -13,10 +13,10 @@ const SwitchThumb = styled(TSwitch.Thumb, {
   animation: 'bouncy',
   size: '$3',
   bg: '$color1',
-});
+})
 
 export const Switch = withStaticProperties(SwitchFrame, {
   Thumb: SwitchThumb,
-});
+})
 
-export type SwitchProps = GetProps<typeof TSwitch>;
+export type SwitchProps = GetProps<typeof TSwitch>

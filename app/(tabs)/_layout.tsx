@@ -1,31 +1,31 @@
-import { useMemo } from 'react';
+import { useMemo } from 'react'
 
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { selectionAsync } from 'expo-haptics';
-import { Tabs } from 'expo-router';
+import { selectionAsync } from 'expo-haptics'
+import { Tabs } from 'expo-router'
 
-import { useTheme } from 'tamagui';
-import { Calculator, Settings } from '@tamagui/lucide-icons';
+import { useTheme } from 'tamagui'
+import { Calculator, Settings } from '@tamagui/lucide-icons'
+import { tokens } from '@tamagui/themes'
 
-import { Text } from '@/components';
-import { tokens } from '@tamagui/themes';
+import { Text } from '@/components'
 
 type TabLabelProps = {
-  label: string;
-  color: string;
-};
+  label: string
+  color: string
+}
 
 const TabLabel = ({ label, color }: TabLabelProps) => (
   <Text col={color} fos="$1" fow="$6">
     {label}
   </Text>
-);
+)
 
 export default function TabLayout() {
-  const theme = useTheme();
-  const { bottom } = useSafeAreaInsets();
-  const bottomDistance = useMemo(() => (bottom > 0 ? bottom - 8 : 8), [bottom]);
+  const theme = useTheme()
+  const { bottom } = useSafeAreaInsets()
+  const bottomDistance = useMemo(() => (bottom > 0 ? bottom - 8 : 8), [bottom])
 
   return (
     <Tabs
@@ -89,5 +89,5 @@ export default function TabLayout() {
         }}
       />
     </Tabs>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import { GetProps, Input as TInput, styled } from 'tamagui';
+import { GetProps, Input as TInput, styled } from 'tamagui'
 
 export const Input = styled(TInput, {
   size: '$3',
@@ -41,6 +41,6 @@ export const Input = styled(TInput, {
     variant: 'small',
     editable: true,
   },
-});
+})
 
-export type InputProps = GetProps<typeof Input>;
+export type InputProps = GetProps<typeof Input>

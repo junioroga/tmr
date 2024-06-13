@@ -1,6 +1,6 @@
 module.exports = function (api) {
-  api.cache(true);
-  const plugins = [];
+  api.cache(true)
+  const plugins = []
 
   plugins.push([
     '@tamagui/babel-plugin',
@@ -9,11 +9,11 @@ module.exports = function (api) {
       config: './tamagui.config.ts',
     },
     'react-native-reanimated/plugin',
-  ]);
+  ])
 
   return {
     presets: ['babel-preset-expo'],
 
     plugins,
-  };
-};
+  }
+}

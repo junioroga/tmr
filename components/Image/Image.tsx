@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-import Animated, { AnimatedProps } from 'react-native-reanimated';
+import Animated, { AnimatedProps } from 'react-native-reanimated'
 
-import { Image as ExpoImage, ImageProps } from 'expo-image';
+import { Image as ExpoImage, ImageProps } from 'expo-image'
 
-const AnimatedImage = Animated.createAnimatedComponent(ExpoImage);
+const AnimatedImage = Animated.createAnimatedComponent(ExpoImage)
 
 export const Image = (props: AnimatedProps<ImageProps>) => {
-  return <AnimatedImage {...props} />;
-};
+  return <AnimatedImage {...props} />
+}
