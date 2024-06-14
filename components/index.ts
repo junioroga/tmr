@@ -1,3 +1,4 @@
+export * from './GradientButton'
 export * from './Input'
 export * from './Image'
 export * from './Loading'

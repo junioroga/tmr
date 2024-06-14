@@ -1,29 +1,31 @@
-import { GetProps, Input as TInput, styled } from 'tamagui'
+import { GetProps, Input as TInput, styled, withStaticProperties } from 'tamagui'
 
-export const Input = styled(TInput, {
-  size: '$3',
+import { Text } from '../Text'
+
+const InputText = styled(TInput, {
+  size: '$5',
   bw: '$1',
-  bc: '$gray11',
+  bc: '$primaryPurple70',
   br: '$3',
   pl: '$3',
-  placeholderTextColor: '$gray11',
+  placeholderTextColor: '$primaryOrange100',
+  ls: 0,
   focusStyle: {
-    bc: '$blue10',
+    bc: '$primaryOrange100',
   },
+  fow: '$4',
+  col: '$primaryPurple100',
 
   variants: {
     variant: {
       small: {
-        h: '$5',
         w: '$5',
       },
       medium: {
-        h: '$5',
         w: '$10',
       },
       full: {
-        h: '$5',
-        f: 1,
+        w: '100%',
       },
     },
     editable: {
@@ -38,9 +40,21 @@ export const Input = styled(TInput, {
   } as const,
 
   defaultVariants: {
-    variant: 'small',
+    variant: 'full',
     editable: true,
   },
 })
 
 export type InputProps = GetProps<typeof Input>
+
+type ErrorProps = GetProps<typeof Text> & {
+  error?: string
+}
+
+const Error = ({ error }: ErrorProps) => {
+  return error ? <Text col="$primaryOrange70">{error}</Text> : <></>
+}
+
+export const Input = withStaticProperties(InputText, {
+  Error,
+})

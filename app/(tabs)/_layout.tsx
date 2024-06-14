@@ -2,6 +2,11 @@ import { Tabs } from 'expo-router'
 
 import { TabBar } from '@/components'
 
+export const unstable_settings = {
+  // Ensure any route can link back to `/`
+  initialRouteName: '(home)/index',
+}
+
 export default function TabLayout() {
   return (
     <Tabs
@@ -12,13 +17,19 @@ export default function TabLayout() {
       }}
       tabBar={(props) => <TabBar {...props} />}>
       <Tabs.Screen
-        name="index"
+        name="(home)"
         options={{
           title: 'TMR',
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="(history)"
+        options={{
+          title: 'Histórico',
+        }}
+      />
+      <Tabs.Screen
+        name="(settings)"
         options={{
           title: 'Configurações',
         }}

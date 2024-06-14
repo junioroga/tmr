@@ -10,7 +10,7 @@ import Animated, {
 } from 'react-native-reanimated'
 
 import { useTheme } from 'tamagui'
-import { Calculator, Settings } from '@tamagui/lucide-icons'
+import { Calculator, History, Settings } from '@tamagui/lucide-icons'
 
 import { Text } from '../Text'
 
@@ -53,14 +53,21 @@ export const TabBarButton = ({
   const theme = useTheme()
 
   const icons: Icons = {
-    index: ({ color, isFocused }: Icon) => (
+    '(home)': ({ color, isFocused }: Icon) => (
       <Calculator
         size="$icon.sm"
         col={color}
         fill={isFocused ? theme.primaryPurple20.val : theme.backgroundTransparent.val}
       />
     ),
-    settings: ({ color, isFocused }: Icon) => (
+    '(history)': ({ color, isFocused }: Icon) => (
+      <History
+        size="$icon.sm"
+        col={color}
+        fill={isFocused ? theme.primaryPurple20.val : theme.backgroundTransparent.val}
+      />
+    ),
+    '(settings)': ({ color, isFocused }: Icon) => (
       <Settings
         size="$icon.sm"
         col={color}

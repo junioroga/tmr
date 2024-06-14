@@ -47,6 +47,13 @@ const animations = createAnimations({
     mass: 1.2,
     stiffness: 250,
   },
+  bouncy2: {
+    type: 'spring',
+    damping: 10,
+    mass: 0.9,
+    stiffness: 100,
+    delay: 1000,
+  },
 })
 
 const customMedia = createMedia({

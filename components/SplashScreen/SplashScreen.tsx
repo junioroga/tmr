@@ -10,12 +10,12 @@ import Animated, {
 } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { YStack } from 'tamagui'
+import { H3, useTheme } from 'tamagui'
+import { LinearGradient } from 'tamagui/linear-gradient'
 
 import { Image } from '../Image'
-import { Text } from '../Text'
 
-const AnimatedText = Animated.createAnimatedComponent(Text)
+const AnimatedText = Animated.createAnimatedComponent(H3)
 
 type Props = {
   setIsReady: (value: boolean) => void
@@ -25,6 +25,7 @@ export const SplashScreen = ({ setIsReady }: Props) => {
   const insets = useSafeAreaInsets()
   const translateYImage = useSharedValue(-100)
   const translateYText = useSharedValue(100)
+  const theme = useTheme()
 
   const navigateToHome = () => {
     setTimeout(() => setIsReady(true), 1000)
@@ -58,28 +59,35 @@ export const SplashScreen = ({ setIsReady }: Props) => {
   }, [runOnJS, navigateToHome, insets.bottom])
 
   return (
-    <YStack f={1} ai="center" bg="white">
-      <YStack f={1} ai="center" jc="center">
-        <Image
-          entering={FadeIn.delay(300).duration(700)}
-          source={require('../../assets/logo.png')}
-          style={{
-            height: 150,
-            width: 150,
-            transform: [{ translateY: translateYImage }],
-          }}
-        />
-        <AnimatedText
-          fos="$8"
-          fow="$6"
-          ls="$3"
-          entering={FadeIn.delay(1200).duration(700)}
-          style={{
-            transform: [{ translateY: translateYText }],
-          }}>
-          TMR
-        </AnimatedText>
-      </YStack>
-    </YStack>
+    <LinearGradient
+      f={1}
+      colors={[
+        theme.primaryPurple20.val,
+        theme.primaryOrange20.val,
+        theme.primaryPurple30.val,
+        theme.primaryOrange30.val,
+      ]}
+      start={{ x: 0, y: 0.1 }}
+      end={{ x: 0, y: 1 }}
+      ai="center"
+      jc="center">
+      <Image
+        entering={FadeIn.delay(300).duration(700)}
+        source={require('../../assets/logo.png')}
+        style={{
+          height: 150,
+          width: 150,
+          transform: [{ translateY: translateYImage }],
+        }}
+      />
+      <AnimatedText
+        col="$primaryPurple100"
+        entering={FadeIn.delay(1200).duration(700)}
+        style={{
+          transform: [{ translateY: translateYText }],
+        }}>
+        TMR
+      </AnimatedText>
+    </LinearGradient>
   )
 }
