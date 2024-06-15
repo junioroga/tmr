@@ -1,12 +1,27 @@
-import { StyleSheet, View } from 'react-native'
+import { YStack } from 'tamagui'
+import { UserX } from '@tamagui/lucide-icons'
+
+import { Button, Dialog } from '@/components'
+import { useAppStore } from '@/store'
 
 export default function Settings() {
-  return <View style={styles.container} />
-}
+  const { clearHistory } = useAppStore()
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-  },
-})
+  return (
+    <YStack f={1} p="$4">
+      <Dialog
+        title="Exclusão"
+        description="Você deseja excluir todo o histórico de medições?"
+        onConfirm={clearHistory}
+        trigger={
+          <Button fd="row" bw={0}>
+            <Button.Icon>
+              <UserX size="$1" col="$primaryOrange100" />
+            </Button.Icon>
+            <Button.Text>Apagar histórico de medidas</Button.Text>
+          </Button>
+        }
+      />
+    </YStack>
+  )
+}

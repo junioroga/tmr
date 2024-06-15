@@ -39,7 +39,7 @@ const light = {
   borderColorFocus: '#888888',
   borderColorPress: '#666666',
   placeholderColor: '#CCCCCC',
-  shadowColor: '#000000',
+  shadowColor: '#888888',
   shadowColorHover: '#CCCCCC',
   shadowColorPress: '#BBBBBB',
   shadowColorFocus: '#AAAAAA',

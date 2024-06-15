@@ -36,6 +36,17 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
+    'no-restricted-imports': [
+      'error',
+      {
+        name: 'lodash',
+        message: 'Please import submodules instead of the full lodash package.',
+      },
+      {
+        name: 'date-fns',
+        message: 'Please import submodules instead of the full date-fns package.',
+      },
+    ],
     'simple-import-sort/imports': [
       'error',
       {

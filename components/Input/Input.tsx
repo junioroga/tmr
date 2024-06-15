@@ -9,7 +9,6 @@ const InputText = styled(TInput, {
   br: '$3',
   pl: '$3',
   placeholderTextColor: '$primaryOrange100',
-  ls: 0,
   focusStyle: {
     bc: '$primaryOrange100',
   },

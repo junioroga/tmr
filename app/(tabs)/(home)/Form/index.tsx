@@ -8,25 +8,36 @@ import Animated, { FadeInUp } from 'react-native-reanimated'
 import { YStack } from 'tamagui'
 
 import { GradientButton, Input } from '@/components'
+import { useAppStore } from '@/store'
 
 const schema = yup
   .object({
-    name: yup.string().required('O nome é obrigatório'),
-    age: yup.number().positive().integer().required('A idade é obrigatória'),
-    genre: yup.string().required('O sexo é obrigatório'),
-    bodyMass: yup.number().positive().integer().required('A massa corporal é obrigatória'),
-    height: yup.number().positive().integer().required('A altura é obrigatória'),
+    name: yup
+      .string()
+      .matches(/^[a-zA-Z ]+$/, 'O nome pode conter apenas letras e espaços')
+      .min(2, 'O nome deve ter pelo menos 2 letras')
+      .required('Nome é obrigatório'),
+    age: yup
+      .number()
+      .positive()
+      .integer()
+      .min(10, 'A idade deve ser maior que 10')
+      .required('Idade é obrigatória'),
+    genre: yup.string().required('Gênero é obrigatório'),
+    bodyMass: yup.number().positive().required('Massa corporal é obrigatória'),
+    height: yup.number().positive().required('Altura é obrigatória'),
   })
   .required()
 
 const AnimatedInput = Animated.createAnimatedComponent(Input)
+const AnimationStack = Animated.createAnimatedComponent(YStack)
 
-interface FormProps {
+export interface FormProps {
   name: string
   genre: string
-  bodyMass: number | undefined
-  height: number | undefined
-  age: number | undefined
+  bodyMass: number
+  height: number
+  age: number
 }
 
 interface TMRFormProps {
@@ -34,13 +45,14 @@ interface TMRFormProps {
 }
 
 export default function TMRForm({ onSubmit }: TMRFormProps) {
+  const { isCalculating, setIsCalculating } = useAppStore()
   const {
     control,
     setFocus,
     handleSubmit,
-    formState: { isValid },
+    formState: { isValid, isDirty },
   } = useForm({
-    mode: 'all',
+    mode: 'onChange',
     defaultValues: {
       name: '',
       genre: '',
@@ -50,6 +62,16 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
     },
     resolver: yupResolver(schema),
   })
+  const enableSubmit = isDirty && isValid
+
+  const handleSubmitForm = (data: FormProps) => {
+    setIsCalculating(true)
+
+    setTimeout(() => {
+      setIsCalculating(false)
+      onSubmit(data)
+    }, 1500)
+  }
 
   return (
     <YStack rowGap="$2">
@@ -91,7 +113,7 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
             <AnimatedInput
               ref={ref}
               entering={FadeInUp.delay(150).duration(150).springify()}
-              placeholder="Sexo"
+              placeholder="Gênero"
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
@@ -121,7 +143,7 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
               placeholder="Massa corporal (em kg)"
               onBlur={onBlur}
               onChangeText={onChange}
-              value={value ? String(value) : ''}
+              value={value ? String(value) : undefined}
               returnKeyType="done"
               clearButtonMode="always"
               inputMode="numeric"
@@ -145,7 +167,7 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
               placeholder="Altura (em cm)"
               onBlur={onBlur}
               onChangeText={onChange}
-              value={value ? String(value) : ''}
+              value={value ? String(value) : undefined}
               returnKeyType="done"
               clearButtonMode="always"
               inputMode="numeric"
@@ -169,17 +191,24 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
               placeholder="Idade"
               onBlur={onBlur}
               onChangeText={onChange}
-              value={value ? String(value) : ''}
+              value={value ? String(value) : undefined}
               returnKeyType="done"
               clearButtonMode="always"
               inputMode="numeric"
-              onSubmitEditing={() => handleSubmit(onSubmit)}
+              onSubmitEditing={handleSubmit(handleSubmitForm)}
             />
             <Input.Error error={error?.message} />
           </YStack>
         )}
       />
-      <GradientButton title="Calcular" onPress={handleSubmit(onSubmit)} disabled={!isValid} />
+      <AnimationStack entering={FadeInUp.delay(750).duration(150).springify()}>
+        <GradientButton
+          title="Calcular"
+          onPress={handleSubmit(handleSubmitForm)}
+          disabled={!enableSubmit}
+          loading={isCalculating}
+        />
+      </AnimationStack>
     </YStack>
   )
 }
