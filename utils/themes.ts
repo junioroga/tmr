@@ -43,6 +43,7 @@ const light = {
   shadowColorHover: '#CCCCCC',
   shadowColorPress: '#BBBBBB',
   shadowColorFocus: '#AAAAAA',
+  overlay: 'rgba(0,0,0,0.4)',
 }
 
 type BaseTheme = typeof light
@@ -92,6 +93,7 @@ const dark: BaseTheme = {
   shadowColorHover: '#4D4D4D',
   shadowColorPress: '#666666',
   shadowColorFocus: '#808080',
+  overlay: 'rgba(0,0,0,0.4)',
 }
 
 export const themes = {

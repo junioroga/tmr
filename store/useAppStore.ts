@@ -26,6 +26,8 @@ export type Calculation = {
   TMR: number
   NAF: number
   createdAt: string
+  levelOfActivity: string
+  condition: string
 }
 
 interface AppState {

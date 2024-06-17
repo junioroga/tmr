@@ -7,12 +7,28 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { getTokens, H3, ScrollView } from 'tamagui'
 
+import {
+  getLevelOfPhysicalActivity,
+  getTMRAthletic,
+  getTMREutrophic,
+  getTRMFat,
+} from '@/utils/calculations'
+import { Condition } from '@/utils/options'
 import { useAppStore } from '@/store'
 
 import Form, { FormProps } from './Form'
 import ResultCard from './ResultCard'
 
 const AnimatedTitle = Animated.createAnimatedComponent(H3)
+
+const TMRFunctions: Record<
+  Condition,
+  (bodyMass: number, height: number, age: number, genre: string) => number
+> = {
+  [Condition.Fat]: getTRMFat,
+  [Condition.Eutrophic]: getTMREutrophic,
+  [Condition.Athletic]: getTMRAthletic,
+}
 
 export default function Home() {
   const { bottom } = useSafeAreaInsets()
@@ -24,11 +40,17 @@ export default function Home() {
   const calculateTMR = useCallback(
     (formData: FormProps) => {
       const id = uniqueId(lastCalculation?.id || '0')
+      const TMR = TMRFunctions[formData.condition as Condition](
+        formData.bodyMass,
+        formData.height,
+        formData.age,
+        formData.genre,
+      )
       const data = {
         ...formData,
         id,
-        TMR: 10,
-        NAF: 30,
+        TMR,
+        NAF: getLevelOfPhysicalActivity(TMR, formData.levelOfActivity),
         createdAt: format(new Date(), 'dd/MM/yyyy HH:mm'),
       }
       addToHistory(data)

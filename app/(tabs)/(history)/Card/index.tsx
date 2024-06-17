@@ -1,6 +1,8 @@
 import { Button, Card as TamaguiCard, XStack, YStack } from 'tamagui'
 
 import { Text } from '@/components'
+import { FieldType, maskHandler } from '@/utils/masks'
+import { Condition } from '@/utils/options'
 import { Calculation } from '@/store'
 
 type CardProps = {
@@ -17,21 +19,79 @@ export const Card = ({ item, onPressUser }: CardProps) => (
         </Text>
         <XStack ai="center" gap="$1.5">
           <Text fow="$6" col="$primaryOrange100">
-            Massa corporal (em kg):
+            Condição:
           </Text>
-          <Text fow="$5">{item.bodyMass}</Text>
+          <Text fow="$5">{item.condition}</Text>
+        </XStack>
+        {item.condition !== Condition.Athletic && (
+          <XStack ai="center" gap="$1.5">
+            <Text fow="$6" col="$primaryOrange100">
+              Gênero:
+            </Text>
+            <Text fow="$5">{item.genre}</Text>
+          </XStack>
+        )}
+        <XStack ai="center" gap="$1.5">
+          <Text fow="$6" col="$primaryOrange100">
+            Massa corporal:
+          </Text>
+          <Text fow="$5">
+            {maskHandler({
+              fieldType: FieldType.DECIMAL,
+              value: String(item.bodyMass),
+            })}{' '}
+            kg
+          </Text>
+        </XStack>
+        {item.condition !== Condition.Athletic && (
+          <>
+            <XStack ai="center" gap="$1.5">
+              <Text fow="$6" col="$primaryOrange100">
+                Altura:
+              </Text>
+              <Text fow="$5">
+                {maskHandler({
+                  fieldType: FieldType.DECIMAL,
+                  value: String(item.height),
+                })}{' '}
+                cm
+              </Text>
+            </XStack>
+            <XStack ai="center" gap="$1.5">
+              <Text fow="$6" col="$primaryOrange100">
+                Idade
+              </Text>
+              <Text fow="$5">{item.age}</Text>
+            </XStack>
+          </>
+        )}
+        <XStack ai="center" gap="$1.5">
+          <Text fow="$6" col="$primaryOrange100">
+            Nível de atividade física:
+          </Text>
+          <Text fow="$5">{item.levelOfActivity}</Text>
         </XStack>
         <XStack ai="center" gap="$1.5">
           <Text fow="$6" col="$primaryOrange100">
             Taxa metabólica de repouso:
           </Text>
-          <Text fow="$5">{item.TMR}</Text>
+          <Text fow="$5">
+            {maskHandler({
+              fieldType: FieldType.DECIMAL,
+              value: String(item.TMR?.toFixed(2)),
+            })}
+          </Text>
         </XStack>
         <XStack ai="center" gap="$1.5">
           <Text fow="$6" col="$primaryOrange100">
-            Nível de atividade física:
+            Calculo de atividade física:
           </Text>
-          <Text fow="$5">{item.NAF}</Text>
+          <Text fow="$5">
+            {maskHandler({
+              fieldType: FieldType.DECIMAL,
+              value: String(item.NAF?.toFixed(2)),
+            })}
+          </Text>
         </XStack>
         <XStack ai="center" gap="$1.5">
           <Text fow="$6" col="$primaryOrange100">

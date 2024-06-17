@@ -15,6 +15,7 @@ export const Dialog = ({ title, description, trigger, onConfirm }: Props) => (
     <AlertDialogTamagui.Trigger asChild>{trigger}</AlertDialogTamagui.Trigger>
     <AlertDialogTamagui.Portal>
       <AlertDialogTamagui.Overlay
+        bg="$overlay"
         key="overlay"
         animation="quick"
         o={0.5}

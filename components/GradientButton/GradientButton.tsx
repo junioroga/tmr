@@ -12,6 +12,7 @@ export const GradientButton = ({
   title,
   loading,
   theme = 'primaryPurple',
+  disabled,
   ...rest
 }: GradientButtonProps) => {
   const globalTheme = useTheme()
@@ -32,7 +33,7 @@ export const GradientButton = ({
   }
 
   return (
-    <Button {...rest} theme={theme}>
+    <Button {...rest} theme={theme} disabled={disabled || loading}>
       <LinearGradient
         h="100%"
         w="100%"
