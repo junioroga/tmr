@@ -17,7 +17,7 @@ export default function ResultCard({ result }: { result: Calculation }) {
       exiting={FadeOutUp.delay(50).duration(150).springify()}
       pt="$4"
       elevation={0.5}>
-      <YGroup separator={<Separator />} elevate>
+      <YGroup separator={<Separator />} $platform-android={{ elevate: true }}>
         <YGroup.Item>
           <YStack p="$4" py="$3" bg="white" gap="$1">
             <Text fos="$5" fow="$6" col="$primaryPurple100">

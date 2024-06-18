@@ -6,14 +6,13 @@ import Animated, { FadeInUp, FadeOutUp } from 'react-native-reanimated'
 
 import { RadioGroup, YStack } from 'tamagui'
 
-import { GradientButton, Input, RadioGroupItem, Text } from '@/components'
+import { AnimatedInput, GradientButton, RadioGroupItem, Text } from '@/components'
 import { FieldType, maskHandler } from '@/utils/masks'
 import { Condition, conditions, genres, levels } from '@/utils/options'
 import { useAppStore } from '@/store'
 
 import { schema } from './schema'
 
-const AnimatedInput = Animated.createAnimatedComponent(Input)
 const AnimatedStack = Animated.createAnimatedComponent(YStack)
 
 export interface FormProps {
@@ -77,7 +76,7 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
             <AnimatedInput
               ref={ref}
               entering={FadeInUp.delay(50).duration(150).springify()}
-              placeholder="Nome"
+              label="Nome"
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
@@ -87,8 +86,8 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
               returnKeyType="next"
               clearButtonMode="always"
               inputMode="text"
+              error={error?.message}
             />
-            <Input.Error error={error?.message} />
           </YStack>
         )}
       />
@@ -144,8 +143,8 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
           <YStack gap="$2">
             <AnimatedInput
               ref={ref}
+              label="Massa corporal (em kg)"
               entering={FadeInUp.delay(450).duration(150).springify()}
-              placeholder="Massa corporal (em kg)"
               onBlur={onBlur}
               onChangeText={onChange}
               value={
@@ -159,9 +158,9 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
               returnKeyType="done"
               clearButtonMode="always"
               inputMode="numeric"
+              error={error?.message}
               onSubmitEditing={() => (notIsAthletic ? setFocus('height') : undefined)}
             />
-            <Input.Error error={error?.message} />
           </YStack>
         )}
       />
@@ -179,7 +178,7 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
                   ref={ref}
                   entering={FadeInUp.delay(600).duration(150).springify()}
                   exiting={FadeOutUp.delay(50).duration(150).springify()}
-                  placeholder="Altura (em cm)"
+                  label="Altura (em cm)"
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={
@@ -193,9 +192,9 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
                   returnKeyType="done"
                   clearButtonMode="always"
                   inputMode="numeric"
+                  error={error?.message}
                   onSubmitEditing={() => setFocus('age')}
                 />
-                <Input.Error error={error?.message} />
               </YStack>
             )}
           />
@@ -211,7 +210,7 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
                   ref={ref}
                   entering={FadeInUp.delay(750).duration(150).springify()}
                   exiting={FadeOutUp.delay(50).duration(150).springify()}
-                  placeholder="Idade"
+                  label="Idade"
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={
@@ -225,8 +224,8 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
                   returnKeyType="done"
                   clearButtonMode="always"
                   inputMode="numeric"
+                  error={error?.message}
                 />
-                <Input.Error error={error?.message} />
               </YStack>
             )}
           />

@@ -7,7 +7,7 @@ export const schema = yup
     name: yup
       .string()
       .required('Nome é obrigatório')
-      .matches(/^[a-zA-Z ]+$/, 'O nome pode conter apenas letras e espaços')
+      .matches(/^[a-zA-Zà-úÀ-Ú ]+$/, 'O nome pode conter apenas letras e espaços')
       .min(3, 'O nome deve ter pelo menos 3 letras'),
     condition: yup.string().required('Condição é obrigatória'),
     genre: yup.string().when('condition', {

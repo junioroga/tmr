@@ -1,11 +1,12 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 
 import { format } from 'date-fns/format'
 import uniqueId from 'lodash/uniqueId'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Animated, { FadeInUp } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { getTokens, H3, ScrollView } from 'tamagui'
+import { getTokens, H3, useTheme } from 'tamagui'
 
 import {
   getLevelOfPhysicalActivity,
@@ -33,18 +34,20 @@ const TMRFunctions: Record<
 export default function Home() {
   const { bottom } = useSafeAreaInsets()
   const { addToHistory, history, isCalculating } = useAppStore()
+  const theme = useTheme()
   const [historyId, setHistoryId] = useState('')
   const result = history.find((item) => item.id === historyId)
   const lastCalculation = history[history.length - 1]
+  const ref = useRef<KeyboardAwareScrollView>(null)
 
   const calculateTMR = useCallback(
     (formData: FormProps) => {
       const id = uniqueId(lastCalculation?.id || '0')
       const TMR = TMRFunctions[formData.condition as Condition](
         formData.bodyMass,
-        formData.height,
-        formData.age,
-        formData.genre,
+        formData.height || 0,
+        formData.age || 0,
+        formData.genre || '',
       )
       const data = {
         ...formData,
@@ -55,16 +58,18 @@ export default function Home() {
       }
       addToHistory(data)
       setHistoryId(id)
+      setTimeout(() => ref.current?.scrollToEnd(true))
     },
     [addToHistory, lastCalculation],
   )
-
   return (
-    <ScrollView
+    <KeyboardAwareScrollView
+      ref={ref}
       contentContainerStyle={{
-        fg: 1,
-        p: '$4',
-        pb: bottom + getTokens().space[12].val,
+        flexGrow: 1,
+        padding: getTokens().space[4].val,
+        paddingBottom: bottom + getTokens().space[12].val,
+        backgroundColor: theme.background.val,
       }}>
       <AnimatedTitle
         als="center"
@@ -75,6 +80,6 @@ export default function Home() {
       </AnimatedTitle>
       <Form onSubmit={calculateTMR} />
       {!isCalculating && result && <ResultCard result={result} />}
-    </ScrollView>
+    </KeyboardAwareScrollView>
   )
 }

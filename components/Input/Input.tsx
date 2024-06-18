@@ -6,6 +6,7 @@ const InputText = styled(TInput, {
   size: '$5',
   bw: '$1',
   bc: '$primaryPurple70',
+  bg: 'white',
   br: '$3',
   pl: '$3',
   placeholderTextColor: '$primaryOrange100',

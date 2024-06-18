@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 module.exports = function (api) {
   api.cache(true)
   const plugins = []
@@ -7,6 +8,8 @@ module.exports = function (api) {
     {
       components: ['tamagui'],
       config: './tamagui.config.ts',
+      logTimings: true,
+      disableExtraction: process.env.NODE_ENV === 'development',
     },
     'react-native-reanimated/plugin',
   ])

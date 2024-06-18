@@ -19,10 +19,10 @@ const storage: StateStorage = {
 export type Calculation = {
   id: string
   name: string
-  genre: string
+  genre?: string
   bodyMass: number
-  height: number
-  age: number
+  height?: number
+  age?: number
   TMR: number
   NAF: number
   createdAt: string

@@ -33,10 +33,10 @@ export const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) =>
       shadowColor: theme.shadowColor.val,
       shadowOffset: {
         width: 0,
-        height: 3,
+        height: 4,
       },
-      shadowOpacity: 0.17,
-      shadowRadius: 3.05,
+      shadowOpacity: 0.5,
+      shadowRadius: 4,
     },
   })
 

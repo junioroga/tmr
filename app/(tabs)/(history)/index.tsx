@@ -3,7 +3,7 @@ import { FlatList, ListRenderItem } from 'react-native'
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { getTokens, Spinner, Stack, YStack } from 'tamagui'
+import { getTokens, Spinner, Stack, useTheme, YStack } from 'tamagui'
 
 import { Text } from '@/components'
 import { Calculation, useAppStore } from '@/store'
@@ -13,6 +13,7 @@ import { Card } from './Card'
 export default function History() {
   const { history } = useAppStore()
   const { bottom } = useSafeAreaInsets()
+  const theme = useTheme()
 
   const onPressUser = useCallback((id: string) => {}, [])
 
@@ -33,7 +34,7 @@ export default function History() {
   )
 
   const renderFooter = useCallback(() => {
-    if (1 === 2) {
+    if (false) {
       return (
         <YStack ai="center" jc="center" my="$3">
           <Spinner />
@@ -68,6 +69,7 @@ export default function History() {
         paddingHorizontal: getTokens().space[4].val,
         paddingTop: getTokens().space[2].val,
         paddingBottom: bottom + getTokens().space[12].val,
+        backgroundColor: theme.background.val,
       }}
     />
   )
