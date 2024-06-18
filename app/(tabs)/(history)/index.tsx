@@ -3,7 +3,7 @@ import { FlatList, ListRenderItem } from 'react-native'
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { getTokens, Spinner, Stack, useTheme, YStack } from 'tamagui'
+import { getTokens, Stack, useTheme, YStack } from 'tamagui'
 
 import { Text } from '@/components'
 import { Calculation, useAppStore } from '@/store'
@@ -11,18 +11,16 @@ import { Calculation, useAppStore } from '@/store'
 import { Card } from './Card'
 
 export default function History() {
-  const { history } = useAppStore()
+  const { history, removeHistory } = useAppStore()
   const { bottom } = useSafeAreaInsets()
   const theme = useTheme()
 
-  const onPressUser = useCallback((id: string) => {}, [])
-
   const renderItem: ListRenderItem<Calculation> = useCallback(
-    ({ item }) => <Card item={item} onPressUser={() => onPressUser(item.id)} />,
-    [onPressUser],
+    ({ item }) => <Card item={item} onRemove={() => removeHistory(item.id)} />,
+    [removeHistory],
   )
 
-  const renderSeparator = useCallback(() => <Stack my="$1.5" />, [])
+  const renderSeparator = useCallback(() => <Stack my="$2" />, [])
 
   const renderEmpty = useCallback(
     () => (
@@ -32,18 +30,6 @@ export default function History() {
     ),
     [],
   )
-
-  const renderFooter = useCallback(() => {
-    if (false) {
-      return (
-        <YStack ai="center" jc="center" my="$3">
-          <Spinner />
-        </YStack>
-      )
-    }
-
-    return null
-  }, [])
 
   const keyExtractor = useCallback((item: Calculation) => item.id, [])
 
@@ -58,7 +44,6 @@ export default function History() {
       renderItem={renderItem}
       ItemSeparatorComponent={renderSeparator}
       ListEmptyComponent={renderEmpty}
-      ListFooterComponent={renderFooter}
       refreshing={false}
       onRefresh={onRefresh}
       onEndReached={onEndReached}

@@ -33,7 +33,7 @@ export type Calculation = {
 interface AppState {
   history: Calculation[]
   addToHistory: (calculationValues: Calculation) => void
-  removeToHistory: (calculationValues: Calculation) => void
+  removeHistory: (id: string) => void
   clearHistory: () => void
   isCalculating: boolean
   setIsCalculating: (value: boolean) => void
@@ -45,8 +45,8 @@ export const useAppStore = create<AppState>()(
       history: [],
       addToHistory: (calculationValues: Calculation) =>
         set((state) => ({ history: [...state.history, calculationValues] })),
-      removeToHistory: (calculationValues: Calculation) =>
-        set((state) => ({ history: state.history.filter((item) => item !== calculationValues) })),
+      removeHistory: (id: string) =>
+        set((state) => ({ history: state.history.filter((item) => item.id !== id) })),
       clearHistory: () => set((state) => ({ history: [] })),
       isCalculating: false,
       setIsCalculating: () => set((state) => ({ isCalculating: !state.isCalculating })),
