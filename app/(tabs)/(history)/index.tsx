@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
 
+import orderBy from 'lodash/orderBy'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { getTokens, Stack, useTheme, YStack } from 'tamagui'
@@ -14,6 +15,7 @@ export default function History() {
   const { history, removeHistory } = useAppStore()
   const { bottom } = useSafeAreaInsets()
   const theme = useTheme()
+  const sortedHistory = orderBy(history, 'createdAt', 'desc')
 
   const renderItem: ListRenderItem<Calculation> = useCallback(
     ({ item }) => <Card item={item} onRemove={() => removeHistory(item.id)} />,
@@ -40,7 +42,7 @@ export default function History() {
   return (
     <FlatList
       keyExtractor={keyExtractor}
-      data={history}
+      data={sortedHistory}
       renderItem={renderItem}
       ItemSeparatorComponent={renderSeparator}
       ListEmptyComponent={renderEmpty}

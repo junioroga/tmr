@@ -12,10 +12,11 @@ type CardProps = {
 
 export const Card = ({ item, onRemove }: CardProps) => {
   const notIsAthletic = item.condition !== Condition.Athletic
+  const itemHeight = notIsAthletic ? 200 : 150
 
   return (
-    <SwipeableDelete onRemove={onRemove} itemHeight={200}>
-      <TamaguiCard f={1} h={200} elevation={0.3}>
+    <SwipeableDelete onRemove={onRemove} itemHeight={itemHeight}>
+      <TamaguiCard f={1} h={itemHeight} elevation={0.3}>
         <Button f={1} p="$3" unstyled>
           <YStack f={1} gap="$0.5">
             <Text fow="$6" fos="$5">
@@ -27,12 +28,14 @@ export const Card = ({ item, onRemove }: CardProps) => {
               </Text>
               <Text fow="$5">{item.condition}</Text>
             </XStack>
-            <XStack ai="center" gap="$1.5">
-              <Text fow="$6" col="$primaryOrange100">
-                Gênero:
-              </Text>
-              <Text fow="$5">{notIsAthletic ? item.genre : '---'}</Text>
-            </XStack>
+            {notIsAthletic && (
+              <XStack ai="center" gap="$1.5">
+                <Text fow="$6" col="$primaryOrange100">
+                  Gênero:
+                </Text>
+                <Text fow="$5">{item.genre}</Text>
+              </XStack>
+            )}
             <XStack ai="center" gap="$1.5">
               <Text fow="$6" col="$primaryOrange100">
                 Massa corporal:
@@ -45,25 +48,27 @@ export const Card = ({ item, onRemove }: CardProps) => {
                 kg
               </Text>
             </XStack>
-            <XStack ai="center" gap="$1.5">
-              <Text fow="$6" col="$primaryOrange100">
-                Altura:
-              </Text>
-              <Text fow="$5">
-                {notIsAthletic
-                  ? `${maskHandler({
+            {notIsAthletic && (
+              <>
+                <XStack ai="center" gap="$1.5">
+                  <Text fow="$6" col="$primaryOrange100">
+                    Altura:
+                  </Text>
+                  <Text fow="$5">
+                    {`${maskHandler({
                       fieldType: FieldType.DECIMAL,
                       value: String(item.height),
-                    })} cm`
-                  : '---'}
-              </Text>
-            </XStack>
-            <XStack ai="center" gap="$1.5">
-              <Text fow="$6" col="$primaryOrange100">
-                Idade
-              </Text>
-              <Text fow="$5"> {notIsAthletic ? item.age : '---'}</Text>
-            </XStack>
+                    })} cm`}
+                  </Text>
+                </XStack>
+                <XStack ai="center" gap="$1.5">
+                  <Text fow="$6" col="$primaryOrange100">
+                    Idade
+                  </Text>
+                  <Text fow="$5"> {item.age}</Text>
+                </XStack>
+              </>
+            )}
             <XStack ai="center" gap="$1.5">
               <Text fow="$6" col="$primaryOrange100">
                 Nível de atividade física:
