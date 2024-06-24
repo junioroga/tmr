@@ -97,7 +97,7 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
         rules={{
           required: true,
         }}
-        render={({ field: { value, onChange }, fieldState: { error } }) => (
+        render={({ field: { value, onChange } }) => (
           <AnimatedStack gap="$2" pt="$2" entering={FadeInUp.delay(150).duration(150).springify()}>
             <Text fos="$5" col="$primaryPurple100">
               Condição
@@ -117,7 +117,7 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
           rules={{
             required: true,
           }}
-          render={({ field: { value, onChange }, fieldState: { error } }) => (
+          render={({ field: { value, onChange } }) => (
             <AnimatedStack
               gap="$2"
               entering={FadeInUp.delay(300).duration(150).springify()}
@@ -237,7 +237,7 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
         rules={{
           required: true,
         }}
-        render={({ field: { value, onChange }, fieldState: { error } }) => (
+        render={({ field: { value, onChange } }) => (
           <AnimatedStack
             gap="$2"
             entering={FadeInUp.delay(900).duration(150).springify()}

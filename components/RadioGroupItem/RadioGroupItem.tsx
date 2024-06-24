@@ -1,4 +1,4 @@
-import { GetProps, Label, RadioGroup, XStack } from 'tamagui'
+import { GetProps, RadioGroup, XStack } from 'tamagui'
 
 import { Text } from '../Text'
 
