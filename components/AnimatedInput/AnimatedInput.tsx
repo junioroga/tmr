@@ -29,6 +29,7 @@ export const AnimatedInput = forwardRef(
   ) => {
     const topAnimated = useSharedValue(value ? -11 : 17)
     const leftAnimated = useSharedValue(value ? 6 : 14)
+    const backgroundAnimated = useSharedValue(value ? '#fff' : 'transparent')
 
     const handleFocus = (e: Pick<AnimatedInputProps, 'onFocus'>) => {
       if (onFocus) {
@@ -41,6 +42,11 @@ export const AnimatedInput = forwardRef(
       })
 
       leftAnimated.value = withTiming(6, {
+        duration: 200,
+        easing: Easing.linear,
+      })
+
+      backgroundAnimated.value = withTiming('#fff', {
         duration: 200,
         easing: Easing.linear,
       })
@@ -61,11 +67,17 @@ export const AnimatedInput = forwardRef(
           duration: 200,
           easing: Easing.linear,
         })
+
+        backgroundAnimated.value = withTiming('transparent', {
+          duration: 100,
+          easing: Easing.linear,
+        })
       }
     }
 
     const animatedStyle = useAnimatedStyle(() => {
       return {
+        backgroundColor: backgroundAnimated.value,
         top: topAnimated.value,
         left: leftAnimated.value,
       }
@@ -89,7 +101,6 @@ export const AnimatedInput = forwardRef(
               fos="$5"
               fow="$5"
               style={animatedStyle}
-              bg="white"
               pe="unset">
               {label}
             </AnimatedText>

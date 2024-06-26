@@ -72,23 +72,21 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
           required: true,
         }}
         render={({ field: { ref, value, onChange, onBlur }, fieldState: { error } }) => (
-          <YStack gap="$2">
-            <AnimatedInput
-              ref={ref}
-              entering={FadeInUp.delay(50).duration(150).springify()}
-              label="Nome"
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              autoCapitalize="words"
-              autoCorrect={false}
-              autoComplete="off"
-              returnKeyType="next"
-              clearButtonMode="always"
-              inputMode="text"
-              error={error?.message}
-            />
-          </YStack>
+          <AnimatedInput
+            ref={ref}
+            entering={FadeInUp.delay(50).duration(150).springify()}
+            label="Nome"
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            autoCapitalize="words"
+            autoCorrect={false}
+            autoComplete="off"
+            returnKeyType="next"
+            clearButtonMode="always"
+            inputMode="text"
+            error={error?.message}
+          />
         )}
       />
       <Controller
@@ -140,28 +138,26 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
           required: true,
         }}
         render={({ field: { ref, value, onChange, onBlur }, fieldState: { error } }) => (
-          <YStack gap="$2">
-            <AnimatedInput
-              ref={ref}
-              label="Massa corporal (em kg)"
-              entering={FadeInUp.delay(450).duration(150).springify()}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={
-                value
-                  ? maskHandler({
-                      fieldType: FieldType.DECIMAL,
-                      value: String(value),
-                    })
-                  : ''
-              }
-              returnKeyType="done"
-              clearButtonMode="always"
-              inputMode="numeric"
-              error={error?.message}
-              onSubmitEditing={() => (notIsAthletic ? setFocus('height') : undefined)}
-            />
-          </YStack>
+          <AnimatedInput
+            ref={ref}
+            label="Massa corporal (em kg)"
+            entering={FadeInUp.delay(450).duration(150).springify()}
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={
+              value
+                ? maskHandler({
+                    fieldType: FieldType.DECIMAL,
+                    value: String(value),
+                  })
+                : ''
+            }
+            returnKeyType="done"
+            clearButtonMode="always"
+            inputMode="numeric"
+            error={error?.message}
+            onSubmitEditing={() => (notIsAthletic ? setFocus('height') : undefined)}
+          />
         )}
       />
       {notIsAthletic && (
@@ -173,29 +169,27 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
               required: true,
             }}
             render={({ field: { ref, value, onChange, onBlur }, fieldState: { error } }) => (
-              <YStack gap="$2">
-                <AnimatedInput
-                  ref={ref}
-                  entering={FadeInUp.delay(600).duration(150).springify()}
-                  exiting={FadeOutUp.delay(50).duration(150).springify()}
-                  label="Altura (em cm)"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={
-                    value
-                      ? maskHandler({
-                          fieldType: FieldType.DECIMAL,
-                          value: String(value),
-                        })
-                      : ''
-                  }
-                  returnKeyType="done"
-                  clearButtonMode="always"
-                  inputMode="numeric"
-                  error={error?.message}
-                  onSubmitEditing={() => setFocus('age')}
-                />
-              </YStack>
+              <AnimatedInput
+                ref={ref}
+                entering={FadeInUp.delay(600).duration(150).springify()}
+                exiting={FadeOutUp.delay(50).duration(150).springify()}
+                label="Altura (em cm)"
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={
+                  value
+                    ? maskHandler({
+                        fieldType: FieldType.DECIMAL,
+                        value: String(value),
+                      })
+                    : ''
+                }
+                returnKeyType="done"
+                clearButtonMode="always"
+                inputMode="numeric"
+                error={error?.message}
+                onSubmitEditing={() => setFocus('age')}
+              />
             )}
           />
           <Controller
@@ -205,28 +199,26 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
               required: true,
             }}
             render={({ field: { ref, value, onChange, onBlur }, fieldState: { error } }) => (
-              <YStack gap="$2">
-                <AnimatedInput
-                  ref={ref}
-                  entering={FadeInUp.delay(750).duration(150).springify()}
-                  exiting={FadeOutUp.delay(50).duration(150).springify()}
-                  label="Idade"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={
-                    value
-                      ? maskHandler({
-                          fieldType: FieldType.NUMBERS,
-                          value: String(value),
-                        })
-                      : undefined
-                  }
-                  returnKeyType="done"
-                  clearButtonMode="always"
-                  inputMode="numeric"
-                  error={error?.message}
-                />
-              </YStack>
+              <AnimatedInput
+                ref={ref}
+                entering={FadeInUp.delay(750).duration(150).springify()}
+                exiting={FadeOutUp.delay(50).duration(150).springify()}
+                label="Idade"
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={
+                  value
+                    ? maskHandler({
+                        fieldType: FieldType.NUMBERS,
+                        value: String(value),
+                      })
+                    : undefined
+                }
+                returnKeyType="done"
+                clearButtonMode="always"
+                inputMode="numeric"
+                error={error?.message}
+              />
             )}
           />
         </>

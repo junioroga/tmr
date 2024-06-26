@@ -6,7 +6,7 @@ import { media } from '@tamagui/config'
 import { config as tamaguiConfig } from '@tamagui/config/v3'
 import { createMedia } from '@tamagui/react-native-media-driver'
 
-import { themes } from './utils/themes'
+import { themes } from './styles/themes'
 
 const fontScale = PixelRatio.getFontScale()
 

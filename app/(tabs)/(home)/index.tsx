@@ -62,6 +62,7 @@ export default function Home() {
     },
     [addToHistory, lastCalculation],
   )
+
   return (
     <KeyboardAwareScrollView
       ref={ref}
