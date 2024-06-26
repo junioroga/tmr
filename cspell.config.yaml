@@ -7,5 +7,7 @@ dictionaryDefinitions:
 words:
   - commitlint
   - conventionalcommits
-ignoreWords: []
+ignoreWords: 
+  - tamagui
+  - haptics
 import: []

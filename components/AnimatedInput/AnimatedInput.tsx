@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { TextInput } from 'react-native'
+import { NativeSyntheticEvent, TextInput, TextInputFocusEventData } from 'react-native'
 
 import Animated, {
   AnimatedProps,
@@ -20,6 +20,8 @@ const AnimatedInputComponent = Animated.createAnimatedComponent(Input)
 export type AnimatedInputProps = AnimatedProps<InputProps> & {
   label: string
   error?: string
+  onFocus?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void
+  onBlur: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void
 }
 
 export const AnimatedInput = forwardRef(
@@ -31,7 +33,7 @@ export const AnimatedInput = forwardRef(
     const leftAnimated = useSharedValue(value ? 6 : 14)
     const backgroundAnimated = useSharedValue(value ? '#fff' : 'transparent')
 
-    const handleFocus = (e: Pick<AnimatedInputProps, 'onFocus'>) => {
+    const handleFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
       if (onFocus) {
         onFocus(e)
       }
@@ -52,7 +54,7 @@ export const AnimatedInput = forwardRef(
       })
     }
 
-    const handleBlur = (e: Pick<AnimatedInputProps, 'onBlur'>) => {
+    const handleBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
       if (onBlur) {
         onBlur(e)
       }
