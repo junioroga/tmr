@@ -3,10 +3,9 @@ import { useCallback, useRef, useState } from 'react'
 import { format } from 'date-fns/format'
 import uniqueId from 'lodash/uniqueId'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import Animated, { FadeInUp } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { getTokens, H3, useTheme } from 'tamagui'
+import { getTokens, useTheme } from 'tamagui'
 
 import {
   getLevelOfPhysicalActivity,
@@ -18,9 +17,8 @@ import { Condition } from '@/utils/options'
 import { useAppStore } from '@/store'
 
 import Form, { FormProps } from './Form'
+import Header from './Header'
 import ResultCard from './ResultCard'
-
-const AnimatedTitle = Animated.createAnimatedComponent(H3)
 
 const TMRFunctions: Record<
   Condition,
@@ -34,6 +32,7 @@ const TMRFunctions: Record<
 export default function Home() {
   const { bottom } = useSafeAreaInsets()
   const { addToHistory, history, isCalculating } = useAppStore()
+  const tokens = getTokens()
   const theme = useTheme()
   const [historyId, setHistoryId] = useState('')
   const result = history.find((item) => item.id === historyId)
@@ -68,17 +67,11 @@ export default function Home() {
       ref={ref}
       contentContainerStyle={{
         flexGrow: 1,
-        padding: getTokens().space[4].val,
-        paddingBottom: bottom + getTokens().space[12].val,
+        padding: tokens.space[4].val,
+        paddingBottom: bottom + tokens.space[12].val,
         backgroundColor: theme.background.val,
       }}>
-      <AnimatedTitle
-        als="center"
-        col="$primaryPurple100"
-        entering={FadeInUp.delay(50).duration(150).springify()}
-        pb="$3">
-        TMR
-      </AnimatedTitle>
+      <Header />
       <Form onSubmit={calculateTMR} />
       {!isCalculating && result && <ResultCard result={result} />}
     </KeyboardAwareScrollView>

@@ -6,13 +6,13 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { impactAsync, selectionAsync } from 'expo-haptics'
 
-import { useTheme } from 'tamagui'
-import { tokens } from '@tamagui/themes'
+import { getTokens, useTheme } from 'tamagui'
 
 import { TabBarButton } from '../TabBarButton'
 
 export const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
   const theme = useTheme()
+  const tokens = getTokens()
   const { bottom } = useSafeAreaInsets()
   const bottomDistance = useMemo(() => (bottom > 0 ? bottom - 8 : 8), [bottom])
 

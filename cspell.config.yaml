@@ -7,7 +7,11 @@ dictionaryDefinitions:
 words:
   - commitlint
   - conventionalcommits
-ignoreWords: 
+  - partialize
+  - Pressable
+  - springify
+  - zustand
   - tamagui
   - haptics
+  - moti
 import: []

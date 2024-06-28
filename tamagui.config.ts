@@ -2,7 +2,6 @@ import { PixelRatio } from 'react-native'
 
 import { createFont, createTamagui } from 'tamagui'
 import { createAnimations } from '@tamagui/animations-moti'
-import { media } from '@tamagui/config'
 import { config as tamaguiConfig } from '@tamagui/config/v3'
 import { createMedia } from '@tamagui/react-native-media-driver'
 
@@ -56,8 +55,7 @@ const animations = createAnimations({
   },
 })
 
-const customMedia = createMedia({
-  ...media,
+const media = createMedia({
   hoverNone: { hover: 'none' },
   pointerCoarse: { pointer: 'coarse' },
   isHandset: { minWidth: 320, maxWidth: 480 },
@@ -127,7 +125,7 @@ const config = createTamagui({
     body: defaultFont,
   },
   themes,
-  media: customMedia,
+  media,
 })
 
 export type AppConfig = typeof config

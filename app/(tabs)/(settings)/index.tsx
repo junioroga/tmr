@@ -1,8 +1,12 @@
-import { ScrollView, Separator, Stack } from 'tamagui'
+import Animated, { FadeInUp } from 'react-native-reanimated'
+
+import { H3, ScrollView, Separator, Stack } from 'tamagui'
 import { Trash } from '@tamagui/lucide-icons'
 
 import { Button, Dialog } from '@/components'
 import { useAppStore } from '@/store'
+
+const AnimatedTitle = Animated.createAnimatedComponent(H3)
 
 export default function Settings() {
   const { clearHistory } = useAppStore()
@@ -15,6 +19,12 @@ export default function Settings() {
       pb="$12"
       bg="$background"
       showsVerticalScrollIndicator={false}>
+      <AnimatedTitle
+        pb="$4"
+        entering={FadeInUp.delay(50).duration(150).springify()}
+        col="$primaryPurple100">
+        Configurações
+      </AnimatedTitle>
       <Stack gap="$2">
         <Dialog
           title="Exclusão"
