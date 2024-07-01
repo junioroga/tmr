@@ -17,6 +17,7 @@ module.exports = {
     'dist/**',
     '.expo/**',
     '.expo-shared/**',
+    'expo-env.d.ts',
   ],
   rules: {
     '@typescript-eslint/no-unused-vars': 'error',

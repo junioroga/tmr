@@ -1,5 +1,6 @@
 export * from './AnimatedInput'
 export * from './Button'
+export * from './DatePicker'
 export * from './Dialog'
 export * from './GradientButton'
 export * from './Input'

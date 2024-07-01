@@ -103,7 +103,7 @@ export const AnimatedInput = forwardRef(
               fos="$5"
               fow="$5"
               style={animatedStyle}
-              pe="unset">
+              pe="none">
               {label}
             </AnimatedText>
           </Stack>

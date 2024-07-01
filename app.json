@@ -12,7 +12,8 @@
         {
           "initialOrientation": "PORTRAIT"
         }
-      ]
+      ],
+      "./styles/custom-android-styles.js"
     ],
     "experiments": {
       "typedRoutes": true,

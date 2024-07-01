@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { FlatList, ListRenderItem } from 'react-native'
+import { FlatList, ListRenderItem, useWindowDimensions } from 'react-native'
 
 import { format } from 'date-fns/format'
 import orderBy from 'lodash/orderBy'
@@ -7,6 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { getTokens, Stack, useTheme, YStack } from 'tamagui'
 
+import Empty from '@/assets/svg/empty.svg'
 import { Text } from '@/components'
 import { Calculation, useAppStore } from '@/store'
 
@@ -15,6 +16,7 @@ import Header from './Header'
 
 export default function History() {
   const { history, removeHistory, filtersHistory } = useAppStore()
+  const { width } = useWindowDimensions()
   const { bottom } = useSafeAreaInsets()
   const theme = useTheme()
   const filteredHistory = history.filter(
@@ -32,11 +34,17 @@ export default function History() {
 
   const renderEmpty = useCallback(
     () => (
-      <YStack f={1} ai="center" jc="center">
-        <Text>Sem histórico para listar 🍃</Text>
+      <YStack f={1} ai="center" jc="center" px="$2" gap="$4">
+        <Empty height={width / 2} />
+        <Text fos="$5" fow="$5" ta="center">
+          Sem cálculos para listar em{' '}
+          <Text fos="$5" fow="$5" col="$primaryOrange100">
+            {format(new Date(filtersHistory?.date), 'dd/MM/yyyy')}
+          </Text>
+        </Text>
       </YStack>
     ),
-    [],
+    [filtersHistory?.date, width],
   )
 
   const keyExtractor = useCallback((item: Calculation) => item.id, [])

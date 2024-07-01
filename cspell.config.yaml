@@ -7,11 +7,14 @@ dictionaryDefinitions:
 words:
   - commitlint
   - conventionalcommits
+  - haptics
+  - moti
   - partialize
   - Pressable
   - springify
-  - zustand
+  - Swipeable
   - tamagui
-  - haptics
-  - moti
+  - zustand
+  - Confirmar
+  - Cancelar
 import: []
