@@ -19,10 +19,11 @@ export interface FormProps {
   name: string
   condition: string
   genre?: string
-  bodyMass: number
+  bodyMass?: number
   height?: number
   age?: number
-  levelOfActivity: string
+  levelOfActivity?: string
+  fatFreeMass?: number
 }
 
 interface TMRFormProps {
@@ -47,12 +48,14 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
       height: undefined,
       age: undefined,
       levelOfActivity: '',
+      fatFreeMass: undefined,
     },
     resolver: yupResolver(schema),
   })
   const enableSubmit = isDirty && isValid
   const condition = watch('condition')
-  const notIsAthletic = condition !== Condition.Athletic
+  const isAthletic = condition === Condition.Athletic
+  const isFatFreeMass = condition === Condition.FatFreeMass
 
   const handleSubmitForm = (data: FormProps) => {
     setIsCalculating(true)
@@ -100,15 +103,16 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
             <Text fos="$5" col="$primaryPurple100">
               Condição
             </Text>
-            <RadioGroup value={value} gap="$2" fd="row" onValueChange={onChange}>
+            <RadioGroup value={value} fw="wrap" gap="$2" fd="row" onValueChange={onChange}>
               <RadioGroupItem size="$3" value={conditions[0].value} label={conditions[0].name} />
               <RadioGroupItem size="$3" value={conditions[1].value} label={conditions[1].name} />
               <RadioGroupItem size="$3" value={conditions[2].value} label={conditions[2].value} />
+              <RadioGroupItem size="$3" value={conditions[3].value} label={conditions[3].value} />
             </RadioGroup>
           </AnimatedStack>
         )}
       />
-      {notIsAthletic && (
+      {!isAthletic && !isFatFreeMass && (
         <Controller
           name="genre"
           control={control}
@@ -123,7 +127,7 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
               <Text fos="$5" col="$primaryPurple100">
                 Gênero
               </Text>
-              <RadioGroup value={value} gap="$2" fd="row" onValueChange={onChange}>
+              <RadioGroup value={value} fw="wrap" gap="$2" fd="row" onValueChange={onChange}>
                 <RadioGroupItem size="$3" value={genres[0].value} label={genres[0].name} />
                 <RadioGroupItem size="$3" value={genres[1].value} label={genres[1].name} />
               </RadioGroup>
@@ -131,36 +135,38 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
           )}
         />
       )}
-      <Controller
-        name="bodyMass"
-        control={control}
-        rules={{
-          required: true,
-        }}
-        render={({ field: { ref, value, onChange, onBlur }, fieldState: { error } }) => (
-          <AnimatedInput
-            ref={ref}
-            label="Massa corporal (em kg)"
-            entering={FadeInUp.delay(450).duration(150).springify()}
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={
-              value
-                ? maskHandler({
-                    fieldType: FieldType.DECIMAL,
-                    value: String(value),
-                  })
-                : ''
-            }
-            returnKeyType="done"
-            clearButtonMode="always"
-            inputMode="numeric"
-            error={error?.message}
-            onSubmitEditing={() => (notIsAthletic ? setFocus('height') : undefined)}
-          />
-        )}
-      />
-      {notIsAthletic && (
+      {!isFatFreeMass && (
+        <Controller
+          name="bodyMass"
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { ref, value, onChange, onBlur }, fieldState: { error } }) => (
+            <AnimatedInput
+              ref={ref}
+              label="Massa corporal (em kg)"
+              entering={FadeInUp.delay(450).duration(150).springify()}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={
+                value
+                  ? maskHandler({
+                      fieldType: FieldType.DECIMAL,
+                      value: String(value),
+                    })
+                  : ''
+              }
+              returnKeyType="done"
+              clearButtonMode="always"
+              inputMode="numeric"
+              error={error?.message}
+              onSubmitEditing={() => (!isAthletic ? setFocus('height') : undefined)}
+            />
+          )}
+        />
+      )}
+      {!isAthletic && !isFatFreeMass && (
         <>
           <Controller
             name="height"
@@ -223,30 +229,64 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
           />
         </>
       )}
-      <Controller
-        name="levelOfActivity"
-        control={control}
-        rules={{
-          required: true,
-        }}
-        render={({ field: { value, onChange } }) => (
-          <AnimatedStack
-            gap="$2"
-            entering={FadeInUp.delay(900).duration(150).springify()}
-            exiting={FadeOutUp.delay(50).duration(150).springify()}
-            py="$2">
-            <Text fos="$5" col="$primaryPurple100">
-              Nível de atividade física
-            </Text>
-            <RadioGroup value={value} fw="wrap" gap="$2" fd="row" onValueChange={onChange}>
-              <RadioGroupItem size="$3" value={levels[0].value} label={levels[0].name} />
-              <RadioGroupItem size="$3" value={levels[1].value} label={levels[1].name} />
-              <RadioGroupItem size="$3" value={levels[2].value} label={levels[2].name} />
-              <RadioGroupItem size="$3" value={levels[3].value} label={levels[3].name} />
-            </RadioGroup>
-          </AnimatedStack>
-        )}
-      />
+      {!isFatFreeMass && (
+        <Controller
+          name="levelOfActivity"
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { value, onChange } }) => (
+            <AnimatedStack
+              gap="$2"
+              entering={FadeInUp.delay(900).duration(150).springify()}
+              exiting={FadeOutUp.delay(50).duration(150).springify()}
+              py="$2">
+              <Text fos="$5" col="$primaryPurple100">
+                Nível de atividade física
+              </Text>
+              <RadioGroup value={value} fw="wrap" gap="$2" fd="row" onValueChange={onChange}>
+                <RadioGroupItem size="$3" value={levels[0].value} label={levels[0].name} />
+                <RadioGroupItem size="$3" value={levels[1].value} label={levels[1].name} />
+                <RadioGroupItem size="$3" value={levels[2].value} label={levels[2].name} />
+                <RadioGroupItem size="$3" value={levels[3].value} label={levels[3].name} />
+              </RadioGroup>
+            </AnimatedStack>
+          )}
+        />
+      )}
+      {isFatFreeMass && (
+        <Controller
+          name="fatFreeMass"
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { ref, value, onChange, onBlur }, fieldState: { error } }) => (
+            <AnimatedInput
+              ref={ref}
+              label="Massa livre de gordura (em kg)"
+              entering={FadeInUp.delay(50).duration(150).springify()}
+              exiting={FadeOutUp.delay(50).duration(150).springify()}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={
+                value
+                  ? maskHandler({
+                      fieldType: FieldType.DECIMAL,
+                      value: String(value),
+                    })
+                  : ''
+              }
+              returnKeyType="done"
+              clearButtonMode="always"
+              inputMode="numeric"
+              error={error?.message}
+              mb="$2"
+            />
+          )}
+        />
+      )}
       <AnimatedStack entering={FadeInUp.delay(1050).duration(150).springify()}>
         <GradientButton
           title="Calcular"

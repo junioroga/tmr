@@ -29,7 +29,7 @@ export const AnimatedInput = forwardRef(
     { error, label, value, entering, onFocus, onBlur, ...rest }: AnimatedInputProps,
     ref: React.LegacyRef<TextInput>,
   ) => {
-    const topAnimated = useSharedValue(value ? -11 : 17)
+    const topAnimated = useSharedValue(value ? -11 : 15)
     const leftAnimated = useSharedValue(value ? 6 : 14)
     const backgroundAnimated = useSharedValue(value ? '#fff' : 'transparent')
 
@@ -60,7 +60,7 @@ export const AnimatedInput = forwardRef(
       }
 
       if (!value) {
-        topAnimated.value = withTiming(17, {
+        topAnimated.value = withTiming(15, {
           duration: 200,
           easing: Easing.linear,
         })

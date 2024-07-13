@@ -11,19 +11,24 @@ export const schema = yup
       .min(3, 'O nome deve ter pelo menos 3 letras'),
     condition: yup.string().required('Condição é obrigatória'),
     genre: yup.string().when('condition', {
-      is: (condition: string) => condition !== Condition.Athletic,
+      is: (condition: string) =>
+        condition !== Condition.Athletic && condition !== Condition.FatFreeMass,
       then: (field) => field.required('Gênero é obrigatório'),
       otherwise: (field) => field,
     }),
-    bodyMass: yup
-      .number()
-      .required('Massa corporal é obrigatória')
-      .transform((_value, originalValue) => Number(originalValue.replace(/,/, '')))
-      .typeError('Por favor, insira um número válido para massa corporal')
-      .positive('Massa corporal deve ser positiva')
-      .min(1, 'Massa corporal deve ser maior que 0'),
+    bodyMass: yup.number().when('condition', {
+      is: (condition: string) => condition !== Condition.FatFreeMass,
+      then: (field) =>
+        field
+          .required('Massa corporal é obrigatória')
+          .typeError('Por favor, insira um número válido para massa corporal')
+          .positive('Massa corporal deve ser positiva')
+          .min(1, 'Massa corporal deve ser maior que 0'),
+      otherwise: (field) => field,
+    }),
     height: yup.number().when('condition', {
-      is: (condition: string) => condition !== Condition.Athletic,
+      is: (condition: string) =>
+        condition !== Condition.Athletic && condition !== Condition.FatFreeMass,
       then: (field) =>
         field
           .required('Altura é obrigatória')
@@ -34,7 +39,8 @@ export const schema = yup
       otherwise: (field) => field,
     }),
     age: yup.number().when('condition', {
-      is: (condition: string) => condition !== Condition.Athletic,
+      is: (condition: string) =>
+        condition !== Condition.Athletic && condition !== Condition.FatFreeMass,
       then: (field) =>
         field
           .required('Idade é obrigatória')
@@ -44,6 +50,20 @@ export const schema = yup
           .min(10, 'Idade deve ser maior que 10'),
       otherwise: (field) => field,
     }),
-    levelOfActivity: yup.string().required('Nível de atividade física é obrigatório'),
+    levelOfActivity: yup.string().when('condition', {
+      is: (condition: string) => condition !== Condition.FatFreeMass,
+      then: (field) => field.required('Nível de atividade física é obrigatório'),
+      otherwise: (field) => field,
+    }),
+    fatFreeMass: yup.number().when('condition', {
+      is: (condition: string) => condition === Condition.FatFreeMass,
+      then: (field) =>
+        field
+          .required('Massa livre de gordura é obrigatória')
+          .typeError('Por favor, insira um número válido para massa livre de gordura')
+          .positive('Massa corporal livre de gordura deve ser positiva')
+          .min(1, 'Massa corporal livre de gordura deve ser maior que 0'),
+      otherwise: (field) => field,
+    }),
   })
   .required()

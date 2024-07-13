@@ -3,6 +3,8 @@ import { useWindowDimensions } from 'react-native'
 
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, {
+  Extrapolation,
+  interpolate,
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
@@ -18,22 +20,29 @@ interface IFieldSwipe {
   children: ReactNode
   onRemove: () => void
   itemHeight: number
+  paddingHorizontal?: number
 }
-export const SwipeableDelete: React.FC<IFieldSwipe> = ({ children, onRemove, itemHeight }) => {
+export const SwipeableDelete: React.FC<IFieldSwipe> = ({
+  children,
+  onRemove,
+  itemHeight,
+  paddingHorizontal = 0,
+}) => {
   const swipeTranslateX = useSharedValue(0)
   const itemHeightAnimated = useSharedValue(itemHeight)
   const isLongPressed = useSharedValue(false)
   const { width } = useWindowDimensions()
+  const finalWidth = width - paddingHorizontal * 2
 
   const longPress = Gesture.LongPress()
-    .minDuration(500)
+    .minDuration(300)
     .onStart((_event) => {
       isLongPressed.value = true
     })
 
   const pan = Gesture.Pan()
     .manualActivation(true)
-    .onTouchesMove((event, stateManager) => {
+    .onTouchesMove((_, stateManager) => {
       if (isLongPressed.value) {
         stateManager.activate()
       } else {
@@ -46,10 +55,10 @@ export const SwipeableDelete: React.FC<IFieldSwipe> = ({ children, onRemove, ite
       }
     })
     .onFinalize(() => {
-      const isShouldDismiss = swipeTranslateX.value < -width * 0.3
+      const isShouldDismiss = swipeTranslateX.value < -finalWidth * 0.5
       if (isShouldDismiss) {
         itemHeightAnimated.value = withTiming(0)
-        swipeTranslateX.value = withTiming(-width, undefined, (isDone) => {
+        swipeTranslateX.value = withTiming(-finalWidth, undefined, (isDone) => {
           if (isDone) {
             runOnJS(onRemove)()
             runOnJS(impactAsync)()
@@ -70,8 +79,18 @@ export const SwipeableDelete: React.FC<IFieldSwipe> = ({ children, onRemove, ite
     ],
   }))
 
-  const opacityStyle = useAnimatedStyle(() => ({
-    opacity: withTiming(swipeTranslateX.value < -width * 0.7 ? 0 : 1),
+  const iconStyle = useAnimatedStyle(() => ({
+    opacity: withTiming(swipeTranslateX.value < -finalWidth * 0.5 ? 0 : 1),
+    transform: [
+      {
+        scale: interpolate(
+          swipeTranslateX.value,
+          [-finalWidth * 0.3, 1],
+          [1, 0.3],
+          Extrapolation.CLAMP,
+        ),
+      },
+    ],
   }))
 
   const itemHeightStyle = useAnimatedStyle(() => ({
@@ -84,7 +103,7 @@ export const SwipeableDelete: React.FC<IFieldSwipe> = ({ children, onRemove, ite
         <Animated.View
           style={[
             { position: 'absolute', height: '100%', right: '10%', justifyContent: 'center' },
-            opacityStyle,
+            iconStyle,
           ]}>
           <Trash2 col="$primaryOrange100" />
         </Animated.View>

@@ -11,6 +11,7 @@ import {
   getLevelOfPhysicalActivity,
   getTMRAthletic,
   getTMREutrophic,
+  getTMRFatFreeMass,
   getTRMFat,
 } from '@/utils/calculations'
 import { Condition } from '@/utils/options'
@@ -20,13 +21,27 @@ import Form, { FormProps } from './Form'
 import Header from './Header'
 import ResultCard from './ResultCard'
 
-const TMRFunctions: Record<
-  Condition,
-  (bodyMass: number, height: number, age: number, genre: string) => number
-> = {
-  [Condition.Fat]: getTRMFat,
-  [Condition.Eutrophic]: getTMREutrophic,
-  [Condition.Athletic]: getTMRAthletic,
+const TMRFunctions = (
+  condition: Condition,
+  bodyMass: number,
+  height: number,
+  age: number,
+  genre: string,
+  fatFreeMass: number,
+): number => {
+  switch (condition) {
+    case Condition.Fat:
+      return getTRMFat(bodyMass, height, age, genre)
+    case Condition.Eutrophic:
+      return getTMREutrophic(bodyMass, height, age, genre)
+    case Condition.Athletic:
+      return getTMRAthletic(bodyMass)
+    case Condition.FatFreeMass:
+      return getTMRFatFreeMass(fatFreeMass)
+
+    default:
+      return 0
+  }
 }
 
 export default function Home() {
@@ -42,17 +57,22 @@ export default function Home() {
   const calculateTMR = useCallback(
     (formData: FormProps) => {
       const id = uniqueId(lastCalculation?.id || '0')
-      const TMR = TMRFunctions[formData.condition as Condition](
-        formData.bodyMass,
+      const TMR = TMRFunctions(
+        formData.condition as Condition,
+        formData.bodyMass || 0,
         formData.height || 0,
         formData.age || 0,
         formData.genre || '',
+        formData.fatFreeMass || 0,
       )
       const data = {
         ...formData,
         id,
         TMR,
-        NAF: getLevelOfPhysicalActivity(TMR, formData.levelOfActivity),
+        NAF:
+          formData.condition !== Condition.FatFreeMass
+            ? getLevelOfPhysicalActivity(TMR, formData.levelOfActivity || '')
+            : 0,
         createdAt: format(new Date(), 'dd/MM/yyyy HH:mm'),
       }
       addToHistory(data)

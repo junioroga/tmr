@@ -29,3 +29,7 @@ export const getTMRAthletic = (bodyMass: number) => {
 export const getLevelOfPhysicalActivity = (TMR: number, levelOfActivity: string) => {
   return TMR * levelsOfActivity[levelOfActivity as LevelOfPhysicalActivity]
 }
+
+export const getTMRFatFreeMass = (fatFreeMass: number) => {
+  return 25.9 * fatFreeMass + 284
+}

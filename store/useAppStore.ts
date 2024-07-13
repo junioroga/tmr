@@ -20,14 +20,15 @@ export type Calculation = {
   id: string
   name: string
   genre?: string
-  bodyMass: number
+  bodyMass?: number
   height?: number
   age?: number
   TMR: number
   NAF: number
   createdAt: string
-  levelOfActivity: string
+  levelOfActivity?: string
   condition: string
+  fatFreeMass?: number
 }
 
 type FilterHistory = {

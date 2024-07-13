@@ -7,6 +7,7 @@ export enum Condition {
   Fat = 'Obeso',
   Eutrophic = 'Eutrófico',
   Athletic = 'Atleta',
+  FatFreeMass = 'Massa livre de gordura',
 }
 
 export enum LevelOfPhysicalActivity {
@@ -26,6 +27,7 @@ export const conditions = [
   { name: Condition.Fat, value: Condition.Fat },
   { name: Condition.Eutrophic, value: Condition.Eutrophic },
   { name: Condition.Athletic, value: Condition.Athletic },
+  { name: Condition.FatFreeMass, value: Condition.FatFreeMass },
 ]
 
 export const levels = [
