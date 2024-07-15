@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { NativeSyntheticEvent, TextInput, TextInputFocusEventData } from 'react-native'
+import { NativeSyntheticEvent, TextInput, TextInputFocusEventData, View } from 'react-native'
 
 import Animated, {
   AnimatedProps,
@@ -9,7 +9,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated'
 
-import { Stack, YStack } from 'tamagui'
+import { YStack } from 'tamagui'
 
 import { Input, InputProps } from '../Input'
 import { Text } from '../Text'
@@ -96,7 +96,7 @@ export const AnimatedInput = forwardRef(
           {...rest}
         />
         {label && (
-          <Stack pos="absolute" als="flex-start" pe="none">
+          <View style={{ position: 'absolute', alignSelf: 'flex-start', pointerEvents: 'none' }}>
             <AnimatedText
               entering={entering}
               col="$primaryPurple100"
@@ -106,7 +106,7 @@ export const AnimatedInput = forwardRef(
               pe="none">
               {label}
             </AnimatedText>
-          </Stack>
+          </View>
         )}
         {error && (
           <AnimatedText pt="$2" col="$primaryOrange70">

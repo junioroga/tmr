@@ -29,7 +29,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.junioroga.tmrapp"
     },
     "android": {
       "adaptiveIcon": {
