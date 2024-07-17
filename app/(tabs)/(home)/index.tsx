@@ -1,8 +1,8 @@
 import { useCallback, useRef, useState } from 'react'
+import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
 
 import { format } from 'date-fns/format'
 import uniqueId from 'lodash/uniqueId'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { getTokens, useTheme } from 'tamagui'
@@ -52,7 +52,7 @@ export default function Home() {
   const [historyId, setHistoryId] = useState('')
   const result = history.find((item) => item.id === historyId)
   const lastCalculation = history[history.length - 1]
-  const ref = useRef<KeyboardAwareScrollView>(null)
+  const ref = useRef<ScrollView>(null)
 
   const calculateTMR = useCallback(
     (formData: FormProps) => {
@@ -77,23 +77,28 @@ export default function Home() {
       }
       addToHistory(data)
       setHistoryId(id)
-      setTimeout(() => ref.current?.scrollToEnd(true))
+      setTimeout(() => ref.current?.scrollToEnd())
     },
     [addToHistory, lastCalculation],
   )
 
   return (
-    <KeyboardAwareScrollView
-      ref={ref}
-      contentContainerStyle={{
-        flexGrow: 1,
-        padding: tokens.space[4].val,
-        paddingBottom: bottom + tokens.space[12].val,
-        backgroundColor: theme.background.val,
-      }}>
-      <Header />
-      <Form onSubmit={calculateTMR} />
-      {!isCalculating && result && <ResultCard result={result} />}
-    </KeyboardAwareScrollView>
+    <KeyboardAvoidingView
+      behavior="padding"
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
+      style={{ flex: 1 }}>
+      <ScrollView
+        ref={ref}
+        contentContainerStyle={{
+          flexGrow: 1,
+          padding: tokens.space[4].val,
+          paddingBottom: bottom + tokens.space[12].val,
+          backgroundColor: theme.background.val,
+        }}>
+        <Header />
+        <Form onSubmit={calculateTMR} />
+        {!isCalculating && result && <ResultCard result={result} />}
+      </ScrollView>
+    </KeyboardAvoidingView>
   )
 }

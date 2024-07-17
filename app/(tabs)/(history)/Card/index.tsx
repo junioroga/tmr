@@ -1,3 +1,5 @@
+import { Platform } from 'react-native'
+
 import { Button, Card as TamaguiCard, getTokens, XStack, YStack } from 'tamagui'
 
 import { SwipeableDelete, Text } from '@/components'
@@ -11,15 +13,13 @@ type CardProps = {
 }
 
 const itemHeightConditions: Record<Condition, number> = {
-  [Condition.Athletic]: 153,
-  [Condition.FatFreeMass]: 117,
-  [Condition.Eutrophic]: 208,
-  [Condition.Fat]: 208,
+  [Condition.Athletic]: Platform.OS === 'ios' ? 148 : 153,
+  [Condition.FatFreeMass]: Platform.OS === 'ios' ? 113 : 117,
+  [Condition.Eutrophic]: Platform.OS === 'ios' ? 200 : 208,
+  [Condition.Fat]: Platform.OS === 'ios' ? 200 : 208,
 }
 
 export const Card = ({ item, onRemove }: CardProps) => {
-  const isAthletic = item.condition === Condition.Athletic
-  const isFatFreeMass = item.condition === Condition.FatFreeMass
   const itemHeight = itemHeightConditions[item.condition as Condition]
 
   return (
@@ -39,7 +39,7 @@ export const Card = ({ item, onRemove }: CardProps) => {
               </Text>
               <Text fow="$5">{item.condition}</Text>
             </XStack>
-            {!isAthletic && !isFatFreeMass && (
+            {!!item.genre && (
               <XStack ai="center" gap="$1.5">
                 <Text fow="$6" col="$primaryOrange100">
                   Gênero:
@@ -47,7 +47,7 @@ export const Card = ({ item, onRemove }: CardProps) => {
                 <Text fow="$5">{item.genre}</Text>
               </XStack>
             )}
-            {!isFatFreeMass && (
+            {!!item.bodyMass && (
               <XStack ai="center" gap="$1.5">
                 <Text fow="$6" col="$primaryOrange100">
                   Massa corporal:
@@ -61,28 +61,28 @@ export const Card = ({ item, onRemove }: CardProps) => {
                 </Text>
               </XStack>
             )}
-            {!isAthletic && !isFatFreeMass && (
-              <>
-                <XStack ai="center" gap="$1.5">
-                  <Text fow="$6" col="$primaryOrange100">
-                    Altura:
-                  </Text>
-                  <Text fow="$5">
-                    {`${maskHandler({
-                      fieldType: FieldType.DECIMAL,
-                      value: String(item.height),
-                    })} cm`}
-                  </Text>
-                </XStack>
-                <XStack ai="center" gap="$1.5">
-                  <Text fow="$6" col="$primaryOrange100">
-                    Idade
-                  </Text>
-                  <Text fow="$5"> {item.age}</Text>
-                </XStack>
-              </>
+            {!!item.height && (
+              <XStack ai="center" gap="$1.5">
+                <Text fow="$6" col="$primaryOrange100">
+                  Altura:
+                </Text>
+                <Text fow="$5">
+                  {`${maskHandler({
+                    fieldType: FieldType.DECIMAL,
+                    value: String(item.height),
+                  })} cm`}
+                </Text>
+              </XStack>
             )}
-            {!isFatFreeMass && (
+            {!!item.age && (
+              <XStack ai="center" gap="$1.5">
+                <Text fow="$6" col="$primaryOrange100">
+                  Idade
+                </Text>
+                <Text fow="$5"> {item.age}</Text>
+              </XStack>
+            )}
+            {!!item.levelOfActivity && (
               <XStack ai="center" gap="$1.5">
                 <Text fow="$6" col="$primaryOrange100">
                   Nível de atividade física:
@@ -101,7 +101,7 @@ export const Card = ({ item, onRemove }: CardProps) => {
                 })}
               </Text>
             </XStack>
-            {!isFatFreeMass && (
+            {!!item.NAF && (
               <XStack ai="center" gap="$1.5">
                 <Text fow="$6" col="$primaryOrange100">
                   Calculo de atividade física:
@@ -114,7 +114,7 @@ export const Card = ({ item, onRemove }: CardProps) => {
                 </Text>
               </XStack>
             )}
-            {isFatFreeMass && (
+            {!!item.fatFreeMass && (
               <XStack ai="center" gap="$1.5">
                 <Text fow="$6" col="$primaryOrange100">
                   Massa livre de gordura:
