@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useRef } from 'react'
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
 
 import { format } from 'date-fns/format'
@@ -46,11 +46,9 @@ const TMRFunctions = (
 
 export default function Home() {
   const { bottom } = useSafeAreaInsets()
-  const { addToHistory, history, isCalculating } = useAppStore()
+  const { addToHistory, history, isCalculating, result, setResult } = useAppStore()
   const tokens = getTokens()
   const theme = useTheme()
-  const [historyId, setHistoryId] = useState('')
-  const result = history.find((item) => item.id === historyId)
   const lastCalculation = history[history.length - 1]
   const ref = useRef<ScrollView>(null)
 
@@ -76,16 +74,16 @@ export default function Home() {
         createdAt: format(new Date(), 'dd/MM/yyyy HH:mm'),
       }
       addToHistory(data)
-      setHistoryId(id)
+      setResult(data)
       setTimeout(() => ref.current?.scrollToEnd())
     },
-    [addToHistory, lastCalculation],
+    [addToHistory, lastCalculation?.id, setResult],
   )
 
   return (
     <KeyboardAvoidingView
-      behavior="padding"
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      keyboardVerticalOffset={20}
       style={{ flex: 1 }}>
       <ScrollView
         ref={ref}

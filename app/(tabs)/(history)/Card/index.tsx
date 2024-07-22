@@ -90,6 +90,20 @@ export const Card = ({ item, onRemove }: CardProps) => {
                 <Text fow="$5">{item.levelOfActivity}</Text>
               </XStack>
             )}
+            {!!item.fatFreeMass && (
+              <XStack ai="center" gap="$1.5">
+                <Text fow="$6" col="$primaryOrange100">
+                  Massa livre de gordura:
+                </Text>
+                <Text fow="$5">
+                  {maskHandler({
+                    fieldType: FieldType.DECIMAL,
+                    value: String(item.fatFreeMass),
+                  })}{' '}
+                  kg
+                </Text>
+              </XStack>
+            )}
             <XStack ai="center" gap="$1.5">
               <Text fow="$6" col="$primaryOrange100">
                 Taxa metabólica de repouso:
@@ -111,20 +125,6 @@ export const Card = ({ item, onRemove }: CardProps) => {
                     fieldType: FieldType.DECIMAL,
                     value: String(item.NAF?.toFixed(2)),
                   })}
-                </Text>
-              </XStack>
-            )}
-            {!!item.fatFreeMass && (
-              <XStack ai="center" gap="$1.5">
-                <Text fow="$6" col="$primaryOrange100">
-                  Massa livre de gordura:
-                </Text>
-                <Text fow="$5">
-                  {maskHandler({
-                    fieldType: FieldType.DECIMAL,
-                    value: String(item.fatFreeMass),
-                  })}{' '}
-                  kg
                 </Text>
               </XStack>
             )}

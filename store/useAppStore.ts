@@ -44,6 +44,8 @@ interface AppState {
   setIsCalculating: (value: boolean) => void
   filtersHistory: FilterHistory
   setFiltersHistory: (filters: FilterHistory) => void
+  result?: Calculation
+  setResult: (calculationValues?: Calculation) => void
 }
 
 export const useAppStore = create<AppState>()(
@@ -54,7 +56,7 @@ export const useAppStore = create<AppState>()(
         set((state) => ({ history: [...state.history, calculationValues] })),
       removeHistory: (id: string) =>
         set((state) => ({ history: state.history.filter((item) => item.id !== id) })),
-      clearHistory: () => set((state) => ({ history: [] })),
+      clearHistory: () => set(() => ({ history: [] })),
       isCalculating: false,
       setIsCalculating: () => set((state) => ({ isCalculating: !state.isCalculating })),
       filtersHistory: {
@@ -62,11 +64,13 @@ export const useAppStore = create<AppState>()(
       },
       setFiltersHistory: (filters: FilterHistory) =>
         set((state) => ({ filtersHistory: { ...state.filtersHistory, ...filters } })),
+      result: undefined,
+      setResult: (calculationValues?: Calculation) => set(() => ({ result: calculationValues })),
     }),
     {
       partialize: (state) =>
         Object.fromEntries(
-          Object.entries(state).filter(([key]) => !['filtersHistory'].includes(key)),
+          Object.entries(state).filter(([key]) => !['filtersHistory', 'result'].includes(key)),
         ),
       name: 'tmr-storage',
       storage: createJSONStorage(() => storage),
