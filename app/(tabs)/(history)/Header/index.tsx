@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Pressable } from 'react-native'
 
 import { format } from 'date-fns/format'
@@ -29,7 +29,8 @@ export default function Header() {
       <XStack bg="$background" p="$4" jc="space-between" ai="center">
         <AnimatedTitle
           entering={FadeInUp.delay(50).duration(150).springify()}
-          col="$primaryPurple100">
+          col="$primaryPurple100"
+        >
           Histórico
         </AnimatedTitle>
         <AnimatedPressable
@@ -39,7 +40,8 @@ export default function Header() {
             backgroundColor: theme.primaryPurple10.val,
             padding: tokens.space['$1.5'].val,
             borderRadius: tokens.radius.$1.val,
-          }}>
+          }}
+        >
           <Text fos="$4" fow="$5">
             {format(filtersHistory.date, 'dd/MM/yyyy')}
           </Text>

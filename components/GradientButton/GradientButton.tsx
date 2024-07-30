@@ -42,7 +42,8 @@ export const GradientButton = ({
         start={{ x: 1, y: 0 }}
         end={{ x: 0, y: 1 }}
         ai="center"
-        jc="center">
+        jc="center"
+      >
         {loading ? (
           <Spinner color="$primaryPurple100" />
         ) : (

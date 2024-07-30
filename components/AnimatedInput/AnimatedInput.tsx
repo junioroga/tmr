@@ -27,7 +27,7 @@ export type AnimatedInputProps = AnimatedProps<InputProps> & {
 export const AnimatedInput = forwardRef(
   (
     { error, label, value, entering, onFocus, onBlur, ...rest }: AnimatedInputProps,
-    ref: React.LegacyRef<TextInput>,
+    ref: React.LegacyRef<TextInput>
   ) => {
     const topAnimated = useSharedValue(value ? -11 : 15)
     const leftAnimated = useSharedValue(value ? 6 : 14)
@@ -103,7 +103,8 @@ export const AnimatedInput = forwardRef(
               fos="$5"
               fow="$5"
               style={animatedStyle}
-              pe="none">
+              pe="none"
+            >
               {label}
             </AnimatedText>
           </View>
@@ -115,5 +116,5 @@ export const AnimatedInput = forwardRef(
         )}
       </YStack>
     )
-  },
+  }
 )

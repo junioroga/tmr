@@ -27,7 +27,7 @@ const TMRFunctions = (
   height: number,
   age: number,
   genre: string,
-  fatFreeMass: number,
+  fatFreeMass: number
 ): number => {
   switch (condition) {
     case Condition.Fat:
@@ -61,7 +61,7 @@ export default function Home() {
         formData.height || 0,
         formData.age || 0,
         formData.genre || '',
-        formData.fatFreeMass || 0,
+        formData.fatFreeMass || 0
       )
       const data = {
         ...formData,
@@ -77,14 +77,15 @@ export default function Home() {
       setResult(data)
       setTimeout(() => ref.current?.scrollToEnd())
     },
-    [addToHistory, lastCalculation?.id, setResult],
+    [addToHistory, lastCalculation?.id, setResult]
   )
 
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={20}
-      style={{ flex: 1 }}>
+      style={{ flex: 1 }}
+    >
       <ScrollView
         ref={ref}
         contentContainerStyle={{
@@ -92,7 +93,8 @@ export default function Home() {
           padding: tokens.space[4].val,
           paddingBottom: bottom + tokens.space[12].val,
           backgroundColor: theme.background.val,
-        }}>
+        }}
+      >
         <Header />
         <Form onSubmit={calculateTMR} />
         {!isCalculating && result && <ResultCard result={result} />}

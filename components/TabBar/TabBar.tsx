@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { StyleSheet, View } from 'react-native'
 
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
@@ -48,8 +48,8 @@ export const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) =>
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
             : options.title !== undefined
-            ? options.title
-            : route.name
+              ? options.title
+              : route.name
 
         if (['_sitemap', '+not-found'].includes(route.name)) return null
 

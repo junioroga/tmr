@@ -18,11 +18,13 @@ export default function Settings() {
       px="$4"
       pb="$12"
       bg="$background"
-      showsVerticalScrollIndicator={false}>
+      showsVerticalScrollIndicator={false}
+    >
       <AnimatedTitle
         pb="$4"
         entering={FadeInUp.delay(50).duration(150).springify()}
-        col="$primaryPurple100">
+        col="$primaryPurple100"
+      >
         Configurações
       </AnimatedTitle>
       <Stack gap="$2">
@@ -39,7 +41,8 @@ export default function Settings() {
               unstyled
               elevate={false}
               elevation={0}
-              pressStyle={{ bw: 0 }}>
+              pressStyle={{ bw: 0 }}
+            >
               <Button.Text>Apagar histórico de medidas</Button.Text>
               <Button.Icon>
                 <Trash size="$1" col="$primaryOrange100" />

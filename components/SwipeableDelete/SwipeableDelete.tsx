@@ -87,7 +87,7 @@ export const SwipeableDelete: React.FC<IFieldSwipe> = ({
           swipeTranslateX.value,
           [-finalWidth * 0.3, 1],
           [1, 0.3],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
       },
     ],
@@ -104,7 +104,8 @@ export const SwipeableDelete: React.FC<IFieldSwipe> = ({
           style={[
             { position: 'absolute', height: '100%', right: '10%', justifyContent: 'center' },
             iconStyle,
-          ]}>
+          ]}
+        >
           <Trash2 col="$primaryOrange100" />
         </Animated.View>
         <Animated.View style={[{ flex: 1 }, transformStyle]}>{children}</Animated.View>

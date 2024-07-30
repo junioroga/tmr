@@ -51,10 +51,10 @@ type ErrorProps = GetProps<typeof Text> & {
   error?: string
 }
 
-const Error = ({ error }: ErrorProps) => {
+const InputError = ({ error }: ErrorProps) => {
   return error ? <Text col="$primaryOrange70">{error}</Text> : <></>
 }
 
 export const Input = withStaticProperties(InputText, {
-  Error,
+  Error: InputError,
 })

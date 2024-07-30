@@ -21,13 +21,13 @@ export default function History() {
   const theme = useTheme()
   const filteredHistory = history.filter(
     (item) =>
-      item.createdAt.substring(0, 10) === format(new Date(filtersHistory?.date), 'dd/MM/yyyy'),
+      item.createdAt.substring(0, 10) === format(new Date(filtersHistory?.date), 'dd/MM/yyyy')
   )
   const sortedHistory = orderBy(filteredHistory, 'createdAt', 'desc')
 
   const renderItem: ListRenderItem<Calculation> = useCallback(
     ({ item }) => <Card item={item} onRemove={() => removeHistory(item.id)} />,
-    [removeHistory],
+    [removeHistory]
   )
 
   const renderSeparator = useCallback(() => <Stack my="$2" />, [])
@@ -44,7 +44,7 @@ export default function History() {
         </Text>
       </YStack>
     ),
-    [filtersHistory?.date, width],
+    [filtersHistory?.date, width]
   )
 
   const keyExtractor = useCallback((item: Calculation) => item.id, [])

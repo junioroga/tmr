@@ -13,7 +13,6 @@ import {
   useFonts,
 } from '@expo-google-fonts/montserrat'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import { initialWindowMetrics, SafeAreaProvider } from 'react-native-safe-area-context'
 
 import * as SplashScreenExpo from 'expo-splash-screen'
 import { StatusBar } from 'expo-status-bar'
@@ -52,12 +51,10 @@ export default function App() {
   }
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <TamaguiProvider config={config} defaultTheme="light">
         <StatusBar style="dark" />
-        <SafeAreaProvider initialMetrics={initialWindowMetrics} onLayout={onLayoutRootView}>
-          {isReady ? <Router /> : <SplashScreen setIsReady={setIsReady} />}
-        </SafeAreaProvider>
+        {isReady ? <Router /> : <SplashScreen setIsReady={setIsReady} />}
       </TamaguiProvider>
     </GestureHandlerRootView>
   )

@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Animated, { FadeInUp } from 'react-native-reanimated'
 
 import { H3, XStack } from 'tamagui'
@@ -13,7 +11,8 @@ export default function Header() {
     <XStack bg="$background" pb="$4" jc="space-between">
       <AnimatedTitle
         entering={FadeInUp.delay(50).duration(150).springify()}
-        col="$primaryPurple100">
+        col="$primaryPurple100"
+      >
         TMR
       </AnimatedTitle>
       <Image

@@ -70,10 +70,10 @@ export const useAppStore = create<AppState>()(
     {
       partialize: (state) =>
         Object.fromEntries(
-          Object.entries(state).filter(([key]) => !['filtersHistory', 'result'].includes(key)),
+          Object.entries(state).filter(([key]) => !['filtersHistory', 'result'].includes(key))
         ),
       name: 'tmr-storage',
       storage: createJSONStorage(() => storage),
-    },
-  ),
+    }
+  )
 )

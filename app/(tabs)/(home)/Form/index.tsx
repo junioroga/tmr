@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -80,7 +80,8 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
                 <AnimatedStack
                   gap="$2"
                   entering={FadeInUp.delay(duration).duration(150).springify()}
-                  exiting={FadeOutUp.delay(50).duration(150).springify()}>
+                  exiting={FadeOutUp.delay(50).duration(150).springify()}
+                >
                   <Text fos="$5" col="$primaryPurple100">
                     Gênero
                   </Text>
@@ -207,7 +208,8 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
                   gap="$2"
                   entering={FadeInUp.delay(duration).duration(150).springify()}
                   exiting={FadeOutUp.delay(50).duration(150).springify()}
-                  py="$2">
+                  py="$2"
+                >
                   <Text fos="$5" col="$primaryPurple100">
                     Nível de atividade física
                   </Text>
@@ -260,7 +262,7 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
           return <></>
       }
     },
-    [control, setFocus],
+    [control, setFocus]
   )
 
   const resetFields = useCallback(() => {

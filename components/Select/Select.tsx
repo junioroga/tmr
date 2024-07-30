@@ -34,7 +34,8 @@ export const Select = ({
         bc="$primaryPurple70"
         px="$3"
         py={0}
-        pressStyle={{ bc: '$primaryOrange100' }}>
+        pressStyle={{ bc: '$primaryOrange100' }}
+      >
         <TSelect.Value
           col={value ? '$primaryPurple100' : '$primaryOrange100'}
           size="$5"

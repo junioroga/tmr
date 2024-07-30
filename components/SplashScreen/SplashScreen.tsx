@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import Animated, {
   Easing,
@@ -9,10 +9,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-
 import { H3, useTheme } from 'tamagui'
 import { LinearGradient } from 'tamagui/linear-gradient'
-
 import { Image } from '../Image'
 
 const AnimatedText = Animated.createAnimatedComponent(H3)
@@ -31,13 +29,14 @@ export const SplashScreen = ({ setIsReady }: Props) => {
     setTimeout(() => setIsReady(true), 1000)
   }
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     translateYImage.value = withDelay(
       1100,
       withTiming(insets.bottom ? 15.5 : 12.5, {
         duration: 700,
         easing: Easing.linear,
-      }),
+      })
     )
 
     translateYText.value = withDelay(
@@ -52,10 +51,10 @@ export const SplashScreen = ({ setIsReady }: Props) => {
           if (finished) {
             runOnJS(navigateToHome)()
           }
-        },
-      ),
+        }
+      )
     )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   }, [runOnJS, navigateToHome, insets.bottom])
 
   return (
@@ -70,7 +69,8 @@ export const SplashScreen = ({ setIsReady }: Props) => {
       start={{ x: 0, y: 0.1 }}
       end={{ x: 0, y: 1 }}
       ai="center"
-      jc="center">
+      jc="center"
+    >
       <Image
         entering={FadeIn.delay(300).duration(700)}
         source={require('../../assets/logo.png')}
@@ -85,7 +85,8 @@ export const SplashScreen = ({ setIsReady }: Props) => {
         entering={FadeIn.delay(1200).duration(700)}
         style={{
           transform: [{ translateY: translateYText }],
-        }}>
+        }}
+      >
         TMR
       </AnimatedText>
     </LinearGradient>

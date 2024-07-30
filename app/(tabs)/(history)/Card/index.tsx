@@ -26,7 +26,8 @@ export const Card = ({ item, onRemove }: CardProps) => {
     <SwipeableDelete
       onRemove={onRemove}
       itemHeight={itemHeight}
-      paddingHorizontal={getTokens().space[4].val}>
+      paddingHorizontal={getTokens().space[4].val}
+    >
       <TamaguiCard f={1} h={itemHeight} elevation={0.3}>
         <Button f={1} p="$3" unstyled>
           <YStack f={1} gap="$0.5">
