@@ -7,6 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { getTokens, useTheme } from 'tamagui'
 
+import { useAppStore } from '@/store'
 import {
   getLevelOfPhysicalActivity,
   getTMRAthletic,
@@ -15,11 +16,9 @@ import {
   getTRMFat,
 } from '@/utils/calculations'
 import { Condition } from '@/utils/options'
-import { useAppStore } from '@/store'
 
-import Form, { FormProps } from './Form'
+import TMRForm, { FormProps } from './Form'
 import Header from './Header'
-import ResultCard from './ResultCard'
 
 const TMRFunctions = (
   condition: Condition,
@@ -46,7 +45,7 @@ const TMRFunctions = (
 
 export default function Home() {
   const { bottom } = useSafeAreaInsets()
-  const { addToHistory, history, isCalculating, result, setResult } = useAppStore()
+  const { addToHistory, history, setResult } = useAppStore()
   const tokens = getTokens()
   const theme = useTheme()
   const lastCalculation = history[history.length - 1]
@@ -94,10 +93,11 @@ export default function Home() {
           paddingBottom: bottom + tokens.space[12].val,
           backgroundColor: theme.background.val,
         }}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
       >
         <Header />
-        <Form onSubmit={calculateTMR} />
-        {!isCalculating && result && <ResultCard result={result} />}
+        <TMRForm onSubmit={calculateTMR} />
       </ScrollView>
     </KeyboardAvoidingView>
   )

@@ -67,6 +67,13 @@ export const maskDecimal = (value: string) => {
   return value.replace(/(\d*)(\d{2})/g, value.length > 2 ? '$1,$2' : '$2')
 }
 
+export const maskDecimalWithPoint = (value: string) => {
+  value = value.replace(/\D/g, '')
+
+  return value.replace(/(\d*)(\d{2})/g, value.length > 2 ? '$1.$2' : '$2')
+}
+
+
 export const maskDecimal3 = (value: string) => {
   value = value.replace(/\D/g, '')
 

@@ -1,5 +1,6 @@
 import * as yup from 'yup'
 
+import { } from '@/utils/masks'
 import { Condition } from '@/utils/options'
 
 export const schema = yup
@@ -21,6 +22,7 @@ export const schema = yup
       then: (field) =>
         field
           .required('Massa corporal é obrigatória')
+          .transform((_value, originalValue) => Number(originalValue.replace(/,/, '.')))
           .typeError('Por favor, insira um número válido para massa corporal')
           .positive('Massa corporal deve ser positiva')
           .min(1, 'Massa corporal deve ser maior que 0'),
@@ -32,7 +34,7 @@ export const schema = yup
       then: (field) =>
         field
           .required('Altura é obrigatória')
-          .transform((_value, originalValue) => Number(originalValue.replace(/,/, '')))
+          .transform((_value, originalValue) => Number(originalValue.replace(/,/, '.')))
           .typeError('Por favor, insira um número válido para altura')
           .positive('Altura deve ser positiva')
           .min(1, 'Altura deve ser maior que 0'),
@@ -60,6 +62,7 @@ export const schema = yup
       then: (field) =>
         field
           .required('Massa livre de gordura é obrigatória')
+          .transform((_value, originalValue) => Number(originalValue.replace(/,/, '.')))
           .typeError('Por favor, insira um número válido para massa livre de gordura')
           .positive('Massa corporal livre de gordura deve ser positiva')
           .min(1, 'Massa corporal livre de gordura deve ser maior que 0'),

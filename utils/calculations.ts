@@ -23,6 +23,7 @@ export const getTMREutrophic = (bodyMass: number, height: number, age: number, g
 }
 
 export const getTMRAthletic = (bodyMass: number) => {
+  console.log('tmr', bodyMass)
   return 24.8 * bodyMass + 10
 }
 

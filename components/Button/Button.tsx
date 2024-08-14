@@ -1,6 +1,6 @@
 import { cloneElement } from 'react'
 
-import { Button as TButton, GetProps, styled, withStaticProperties } from 'tamagui'
+import { GetProps, Button as TButton, styled, withStaticProperties } from 'tamagui'
 
 const ButtonFrame = styled(TButton, {
   size: '$4',
@@ -18,7 +18,7 @@ const ButtonFrame = styled(TButton, {
         w: '$10',
       },
       full: {
-        w: '100%',
+        fs: 1,
       },
     },
     disabled: {

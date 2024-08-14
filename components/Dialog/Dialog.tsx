@@ -24,7 +24,7 @@ export const Dialog = ({ title, description, trigger, onConfirm }: Props) => (
       />
       <AlertDialogTamagui.Content
         bordered
-        elevate
+        elevation="$0.25"
         key="content"
         animation={[
           'quick',
