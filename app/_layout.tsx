@@ -54,7 +54,8 @@ export default function App() {
     <GestureHandlerRootView style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <TamaguiProvider config={config} defaultTheme="light">
         <StatusBar style="dark" />
-        {isReady ? <Router /> : <SplashScreen setIsReady={setIsReady} />}
+        {!isReady && <SplashScreen setIsReady={setIsReady} />}
+        {isReady && <Router />}
       </TamaguiProvider>
     </GestureHandlerRootView>
   )
