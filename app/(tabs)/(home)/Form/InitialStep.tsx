@@ -23,7 +23,7 @@ export default function InitialStep({ setStep }: Props) {
   const error = Object.keys(errors).some((value) => value === 'name' || 'condition')
 
   return (
-    <>
+    <YStack rowGap="$3" pt="$4">
       <Controller
         {...register('name')}
         rules={{
@@ -54,7 +54,7 @@ export default function InitialStep({ setStep }: Props) {
         }}
         render={({ field: { value, onChange } }) => (
           <AnimatedStack gap="$2" pt="$2" entering={FadeInUp.delay(150).duration(150).springify()}>
-            <Text fos="$5" col="$primaryPurple100">
+            <Text fos="$5" fow="$5" col="$primaryPurple100">
               Condição
             </Text>
             <RadioGroup value={value} fw="wrap" gap="$2" fd="row" onValueChange={onChange}>
@@ -77,6 +77,6 @@ export default function InitialStep({ setStep }: Props) {
           disabled={error || !isDirtyName || !isDirtyCondition}
         />
       </AnimatedStack>
-    </>
+    </YStack>
   )
 }

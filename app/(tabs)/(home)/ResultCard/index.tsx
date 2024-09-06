@@ -15,6 +15,7 @@ export default function ResultCard({ result }: { result: Calculation }) {
       separator={<Separator />}
       elevation={0.5}
       elevationAndroid={0.5}
+      mb="$2"
     >
       <YGroup.Item>
         <YStack p="$4" py="$3" bg="white" gap="$1">

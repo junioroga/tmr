@@ -30,25 +30,10 @@ export const SwipeableDelete: React.FC<IFieldSwipe> = ({
 }) => {
   const swipeTranslateX = useSharedValue(0)
   const itemHeightAnimated = useSharedValue(itemHeight)
-  const isLongPressed = useSharedValue(false)
   const { width } = useWindowDimensions()
   const finalWidth = width - paddingHorizontal * 2
 
-  const longPress = Gesture.LongPress()
-    .minDuration(300)
-    .onStart((_event) => {
-      isLongPressed.value = true
-    })
-
   const pan = Gesture.Pan()
-    .manualActivation(true)
-    .onTouchesMove((_, stateManager) => {
-      if (isLongPressed.value) {
-        stateManager.activate()
-      } else {
-        stateManager.fail()
-      }
-    })
     .onChange((event) => {
       if (event.translationX < 0) {
         swipeTranslateX.value = event.translationX
@@ -67,16 +52,10 @@ export const SwipeableDelete: React.FC<IFieldSwipe> = ({
       } else {
         swipeTranslateX.value = withSpring(0)
       }
-      isLongPressed.value = false
     })
 
-  const composed = Gesture.Simultaneous(longPress, pan)
-
   const transformStyle = useAnimatedStyle(() => ({
-    transform: [
-      { translateX: swipeTranslateX.value },
-      { scale: withTiming(isLongPressed.value ? 1.05 : 1) },
-    ],
+    transform: [{ translateX: swipeTranslateX.value }],
   }))
 
   const iconStyle = useAnimatedStyle(() => ({
@@ -98,7 +77,7 @@ export const SwipeableDelete: React.FC<IFieldSwipe> = ({
   }))
 
   return (
-    <GestureDetector gesture={composed}>
+    <GestureDetector gesture={pan}>
       <Animated.View style={itemHeightStyle}>
         <Animated.View
           style={[
