@@ -16,6 +16,7 @@ export default function Header() {
         TMR
       </AnimatedTitle>
       <Image
+        testID="image-logo"
         entering={FadeInUp.delay(150).duration(150).springify()}
         source={require('../../../../assets/logo.png')}
         style={{

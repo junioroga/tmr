@@ -13,7 +13,11 @@
 			"dist/**",
 			".expo/**",
 			".expo-shared/**",
-			"**/expo-env.d.ts"
+			"**/expo-env.d.ts",
+      "**/.tamagui/**",
+      "jest.setup.js",
+      "jest.config.js",
+      "coverage"
 		]
   },
   "organizeImports": { "enabled": true },
@@ -89,7 +93,11 @@
       "dist/**",
       ".expo/**",
       ".expo-shared/**",
-      "**/expo-env.d.ts"
+      "**/expo-env.d.ts",
+      "**/.tamagui/**",
+      "jest.setup.js",
+      "jest.config.js",
+      "coverage"
     ]
   },
   "javascript": {
@@ -152,7 +160,7 @@
           },
           "correctness": {
             "noUndeclaredVariables": "off",
-            "noUnusedVariables": "warn"
+            "noUnusedVariables": "error"
           },
           "style": {
             "useConsistentArrayType": {

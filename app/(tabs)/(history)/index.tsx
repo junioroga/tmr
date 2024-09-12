@@ -5,13 +5,13 @@ import { format } from 'date-fns/format'
 import orderBy from 'lodash/orderBy'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { getTokens, Stack, useTheme, YStack } from 'tamagui'
+import { Stack, YStack, getTokens, useTheme } from 'tamagui'
 
 import Empty from '@/assets/svg/empty.svg'
 import { Text } from '@/components'
 import { Calculation, useAppStore } from '@/store'
 
-import { Card } from './Card'
+import Card from './Card'
 import Header from './Header'
 
 export default function History() {

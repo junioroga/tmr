@@ -11,14 +11,8 @@ pre-commit:
       glob: '*.md'
       run: yarn markdown-link-check {staged_files}
     test:
-      run: |
-        files=$(git diff --cached --name-only --diff-filter=ACM | grep '\.spec\.' || true)
-          if [ -n "$files" ]; then
-            echo "Running tests for modified .spec files..."
-            yarn jest $files
-          else
-            echo "No .spec files to test."
-          fi
+     glob: "*.{js,jsx,ts,tsx}"
+     run: yarn test -b --findRelatedTests {staged_files}
 
 commit-msg:
   parallel: true

@@ -12,6 +12,7 @@
     "lint": "biome lint --write",
     "format": "biome format --write",
     "typecheck": "tsc --noEmit",
+    "test": "jest",
     "upgrade:tamagui": "yarn up '*tamagui*'@latest '@tamagui/*'@latest",
     "rebuild": "rm -rf node_modules && yarn"
   },
@@ -67,9 +68,15 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@tamagui/babel-plugin": "^1.110.2",
     "@tamagui/react-native-svg": "^1.110.2",
+    "@testing-library/react-native": "^12.6.1",
+    "@types/jest": "^29.5.12",
     "@types/lodash": "^4",
     "@types/react": "~18.2.45",
+    "@types/react-test-renderer": "^18",
     "expo-doctor": "^1.6.1",
+    "jest": "^29.7.0",
+    "jest-expo": "^51.0.4",
+    "jest-transformer-svg": "^2.0.2",
     "lefthook": "^1.6.18",
     "react-native-svg-transformer": "^1.4.0",
     "typescript": "~5.3.3"

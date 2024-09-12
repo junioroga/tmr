@@ -4,7 +4,7 @@ import { Pressable } from 'react-native'
 import { format } from 'date-fns/format'
 import Animated, { FadeInUp } from 'react-native-reanimated'
 
-import { getTokens, H3, useTheme, XStack } from 'tamagui'
+import { H3, XStack, getTokens, useTheme } from 'tamagui'
 
 import { DatePicker, Text } from '@/components'
 import { useAppStore } from '@/store'
@@ -34,6 +34,7 @@ export default function Header() {
           Histórico
         </AnimatedTitle>
         <AnimatedPressable
+          testID="date-picker-button"
           onPress={() => setShowDate(true)}
           entering={FadeInUp.delay(150).duration(150).springify()}
           style={{
@@ -50,7 +51,6 @@ export default function Header() {
       <DatePicker
         onConfirm={(date?: Date) => {
           toggleDatePicker()
-
           if (date) {
             setDate(date)
           }

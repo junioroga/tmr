@@ -1,13 +1,13 @@
 import { Platform } from 'react-native'
 
-import { Button, Card as TamaguiCard, getTokens, XStack, YStack } from 'tamagui'
+import { Button, Card as TamaguiCard, XStack, YStack, getTokens } from 'tamagui'
 
 import { SwipeableDelete, Text } from '@/components'
+import { Calculation } from '@/store'
 import { FieldType, maskHandler } from '@/utils/masks'
 import { Condition } from '@/utils/options'
-import { Calculation } from '@/store'
 
-type CardProps = {
+export type CardProps = {
   item: Calculation
   onRemove: () => void
 }
@@ -19,7 +19,7 @@ const itemHeightConditions: Record<Condition, number> = {
   [Condition.Fat]: Platform.OS === 'ios' ? 200 : 208,
 }
 
-export const Card = ({ item, onRemove }: CardProps) => {
+export default function Card({ item, onRemove }: CardProps) {
   const itemHeight = itemHeightConditions[item.condition as Condition]
 
   return (
@@ -31,21 +31,25 @@ export const Card = ({ item, onRemove }: CardProps) => {
       <TamaguiCard f={1} h={itemHeight} elevation={0.3}>
         <Button f={1} p="$3" unstyled>
           <YStack f={1} gap="$0.5">
-            <Text fow="$6" fos="$5">
+            <Text testID="name" fow="$6" fos="$5">
               {item.name}
             </Text>
             <XStack ai="center" gap="$1.5">
               <Text fow="$6" col="$primaryOrange100">
                 Condição:
               </Text>
-              <Text fow="$5">{item.condition}</Text>
+              <Text testID="condition" fow="$5">
+                {item.condition}
+              </Text>
             </XStack>
             {!!item.genre && (
               <XStack ai="center" gap="$1.5">
                 <Text fow="$6" col="$primaryOrange100">
                   Gênero:
                 </Text>
-                <Text fow="$5">{item.genre}</Text>
+                <Text testID="genre" fow="$5">
+                  {item.genre}
+                </Text>
               </XStack>
             )}
             {!!item.bodyMass && (
@@ -53,7 +57,7 @@ export const Card = ({ item, onRemove }: CardProps) => {
                 <Text fow="$6" col="$primaryOrange100">
                   Massa corporal:
                 </Text>
-                <Text fow="$5">
+                <Text testID="bodyMass" fow="$5">
                   {maskHandler({
                     fieldType: FieldType.DECIMAL,
                     value: String(item.bodyMass),
@@ -67,7 +71,7 @@ export const Card = ({ item, onRemove }: CardProps) => {
                 <Text fow="$6" col="$primaryOrange100">
                   Altura:
                 </Text>
-                <Text fow="$5">
+                <Text testID="height" fow="$5">
                   {`${maskHandler({
                     fieldType: FieldType.DECIMAL,
                     value: String(item.height),
@@ -80,7 +84,10 @@ export const Card = ({ item, onRemove }: CardProps) => {
                 <Text fow="$6" col="$primaryOrange100">
                   Idade
                 </Text>
-                <Text fow="$5"> {item.age}</Text>
+                <Text testID="age" fow="$5">
+                  {' '}
+                  {item.age}
+                </Text>
               </XStack>
             )}
             {!!item.levelOfActivity && (
@@ -88,7 +95,9 @@ export const Card = ({ item, onRemove }: CardProps) => {
                 <Text fow="$6" col="$primaryOrange100">
                   Nível de atividade física:
                 </Text>
-                <Text fow="$5">{item.levelOfActivity}</Text>
+                <Text testID="levelOfActivity" fow="$5">
+                  {item.levelOfActivity}
+                </Text>
               </XStack>
             )}
             {!!item.fatFreeMass && (
@@ -96,7 +105,7 @@ export const Card = ({ item, onRemove }: CardProps) => {
                 <Text fow="$6" col="$primaryOrange100">
                   Massa livre de gordura:
                 </Text>
-                <Text fow="$5">
+                <Text testID="fatFreeMass" fow="$5">
                   {maskHandler({
                     fieldType: FieldType.DECIMAL,
                     value: String(item.fatFreeMass),
@@ -109,7 +118,7 @@ export const Card = ({ item, onRemove }: CardProps) => {
               <Text fow="$6" col="$primaryOrange100">
                 Taxa metabólica de repouso:
               </Text>
-              <Text fow="$5">
+              <Text testID="TMR" fow="$5">
                 {maskHandler({
                   fieldType: FieldType.DECIMAL,
                   value: String(item.TMR?.toFixed(2)),
@@ -121,7 +130,7 @@ export const Card = ({ item, onRemove }: CardProps) => {
                 <Text fow="$6" col="$primaryOrange100">
                   Calculo de atividade física:
                 </Text>
-                <Text fow="$5">
+                <Text testID="NAF" fow="$5">
                   {maskHandler({
                     fieldType: FieldType.DECIMAL,
                     value: String(item.NAF?.toFixed(2)),
@@ -133,7 +142,9 @@ export const Card = ({ item, onRemove }: CardProps) => {
               <Text fow="$6" col="$primaryOrange100">
                 Criado em:
               </Text>
-              <Text fow="$5">{item.createdAt}</Text>
+              <Text testID="createdAt" fow="$5">
+                {item.createdAt}
+              </Text>
             </XStack>
           </YStack>
         </Button>

@@ -8,7 +8,11 @@ import { FieldType, maskHandler } from '@/utils/masks'
 
 const AnimatedStack = Animated.createAnimatedComponent(YGroup)
 
-export default function ResultCard({ result }: { result: Calculation }) {
+export type ResultCardProps = {
+  result: Pick<Calculation, 'TMR' | 'NAF'>
+}
+
+export default function ResultCard({ result }: ResultCardProps) {
   return (
     <AnimatedStack
       entering={FadeInUp.delay(50).duration(150).springify()}
