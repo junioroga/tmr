@@ -5,13 +5,13 @@ import Animated, { FadeInUp } from 'react-native-reanimated'
 import { yupResolver } from '@hookform/resolvers/yup'
 import ProgressSteps, { Content } from '@joaosousa/react-native-progress-steps'
 
+import { schema } from '@/schemas/FormSchema'
 import { useAppStore } from '@/store'
 import { Condition } from '@/utils/options'
 import { YStack, useTheme } from 'tamagui'
 import InitialStep from './InitialStep'
 import ResultStep from './ResultStep'
 import SecondStep from './SecondStep'
-import { schema } from './schema'
 
 const AnimatedStack = Animated.createAnimatedComponent(YStack)
 

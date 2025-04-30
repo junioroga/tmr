@@ -11,8 +11,8 @@ import { getTokens, useTheme } from 'tamagui'
 import { TabBarButton } from '../TabBarButton'
 
 export const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
-  const theme = useTheme()
   const tokens = getTokens()
+  const theme = useTheme()
   const { bottom } = useSafeAreaInsets()
   const bottomDistance = useMemo(() => (bottom > 0 ? bottom - 8 : 8), [bottom])
 
@@ -21,7 +21,7 @@ export const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) =>
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginHorizontal: tokens.space.$4.val,
+      marginHorizontal: 10,
       paddingVertical: tokens.space.$3.val,
       backgroundColor: theme.background.val,
       position: 'absolute',
@@ -83,7 +83,7 @@ export const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) =>
             onLongPress={onLongPress}
             isFocused={isFocused}
             routeName={route.name}
-            color={isFocused ? theme.primaryPurple100.val : theme.orange10Dark.val}
+            color={isFocused ? theme.primaryPurple100.val : theme.primaryOrange100.val}
             label={label}
           />
         )

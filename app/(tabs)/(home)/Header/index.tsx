@@ -18,7 +18,7 @@ export default function Header() {
       <Image
         testID="image-logo"
         entering={FadeInUp.delay(150).duration(150).springify()}
-        source={require('../../../../assets/logo.png')}
+        source={require('../../../../src/assets/logo.png')}
         style={{
           height: 35,
           width: 35,

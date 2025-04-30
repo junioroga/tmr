@@ -1,4 +1,4 @@
-import { act, render } from '@/test/test-utils'
+import { act, render } from '~/test/test-utils'
 
 import ResultCard, { ResultCardProps } from '../index'
 

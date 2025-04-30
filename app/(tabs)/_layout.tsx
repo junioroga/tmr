@@ -15,7 +15,7 @@ export default function TabLayout() {
         headerShown: false,
         tabBarHideOnKeyboard: true,
       }}
-      tabBar={(props) => <TabBar {...props} />}
+      tabBar={(props: any) => <TabBar {...props} />}
     >
       <Tabs.Screen
         name="(home)"

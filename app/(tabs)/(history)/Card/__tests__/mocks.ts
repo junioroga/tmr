@@ -1,5 +1,5 @@
-import { Calculation } from "@/store"
-import { Condition, Genres, LevelOfPhysicalActivity } from "@/utils/options"
+import { Calculation } from '@/store'
+import { Condition, Genres, LevelOfPhysicalActivity } from '@/utils/options'
 
 const mockAllValues: Calculation = {
   id: '42346',

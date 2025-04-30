@@ -4,6 +4,7 @@
     "slug": "tmr-app",
     "version": "1.0.0",
     "scheme": "tmr-app",
+    "newArchEnabled": true,
     "plugins": [
       "expo-router",
       "expo-font",
@@ -13,26 +14,28 @@
           "initialOrientation": "PORTRAIT"
         }
       ],
-      "./styles/custom-android-styles.js"
+      "./src/styles/custom-android-styles.js"
     ],
     "experiments": {
       "typedRoutes": true,
       "tsconfigPaths": true
     },
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.junioroga.tmrapp"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "softwareKeyboardLayoutMode": "pan",

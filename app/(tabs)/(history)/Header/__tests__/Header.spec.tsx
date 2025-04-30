@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@/test/test-utils'
+import { fireEvent, render } from '~/test/test-utils'
 
 import { format } from 'date-fns/format'
 import { View as MockView } from 'react-native'

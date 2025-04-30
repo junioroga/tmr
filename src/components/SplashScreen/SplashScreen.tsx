@@ -38,7 +38,7 @@ export const SplashScreen = ({ setIsReady }: Props) => {
   useEffect(() => {
     translateYImage.value = withDelay(
       700,
-      withTiming(insets.bottom ? 15.5 : 12.5, {
+      withTiming(0, {
         duration: 700,
         easing: Easing.linear,
       })

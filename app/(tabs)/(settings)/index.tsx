@@ -1,7 +1,7 @@
 import Animated, { FadeInUp } from 'react-native-reanimated'
 
-import { H3, ScrollView, Separator, Stack } from 'tamagui'
 import { Trash } from '@tamagui/lucide-icons'
+import { H3, ScrollView, Separator, Stack } from 'tamagui'
 
 import { Button, Dialog } from '@/components'
 import { useAppStore } from '@/store'

@@ -5,7 +5,7 @@ import { impactAsync } from 'expo-haptics'
 import { useFormContext } from 'react-hook-form'
 import Animated, { FadeInUp } from 'react-native-reanimated'
 import { XStack, YStack } from 'tamagui'
-import ResultCard from '../ResultCard'
+import ResultCard from './ResultCard'
 
 type Props = {
   setStep: (step: number) => void

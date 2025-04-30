@@ -1,6 +1,5 @@
 import * as yup from 'yup'
 
-import { } from '@/utils/masks'
 import { Condition } from '@/utils/options'
 
 export const schema = yup

@@ -20,9 +20,9 @@ import { StatusBar } from 'expo-status-bar'
 import { TamaguiProvider } from 'tamagui'
 
 import { SplashScreen } from '@/components'
-import Router from '@/router'
 
-import config from '@/tamagui.config'
+import Router from '@/router'
+import config from '~/tamagui.config'
 
 SplashScreenExpo.preventAutoHideAsync()
 

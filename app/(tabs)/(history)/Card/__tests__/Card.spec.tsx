@@ -1,4 +1,4 @@
-import { act, render } from '@/test/test-utils'
+import { act, render } from '~/test/test-utils'
 
 import { Condition, Genres, LevelOfPhysicalActivity } from '@/utils/options'
 import Card, { CardProps } from '../index'

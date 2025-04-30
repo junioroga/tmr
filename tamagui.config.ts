@@ -1,11 +1,10 @@
 import { PixelRatio } from 'react-native'
 
-import { createFont, createTamagui } from 'tamagui'
 import { createAnimations } from '@tamagui/animations-moti'
 import { config as tamaguiConfig } from '@tamagui/config/v3'
-import { createMedia } from '@tamagui/react-native-media-driver'
+import { createFont, createTamagui } from 'tamagui'
 
-import { themes } from './styles/themes'
+import { themes } from './src/styles/themes'
 
 const fontScale = PixelRatio.getFontScale()
 
@@ -53,18 +52,6 @@ const animations = createAnimations({
     stiffness: 100,
     delay: 1000,
   },
-})
-
-const media = createMedia({
-  hoverNone: { hover: 'none' },
-  pointerCoarse: { pointer: 'coarse' },
-  isHandset: { minWidth: 320, maxWidth: 480 },
-  isTablet: { minWidth: 481, maxWidth: 768 },
-  isHandsetOrTablet: { maxWidth: 768 },
-  isSmallDesktop: { minWidth: 769, maxWidth: 1024 },
-  isNormalDesktop: { minWidth: 1025, maxWidth: 1440 },
-  isWideDesktop: { minWidth: 1441 },
-  isDesktop: { minWidth: 769 },
 })
 
 const defaultFont = createFont({
@@ -125,7 +112,17 @@ const config = createTamagui({
     body: defaultFont,
   },
   themes,
-  media,
+  media: {
+    hoverNone: { hover: 'none' },
+    pointerCoarse: { pointer: 'coarse' },
+    isHandset: { minWidth: 320, maxWidth: 480 },
+    isTablet: { minWidth: 481, maxWidth: 768 },
+    isHandsetOrTablet: { maxWidth: 768 },
+    isSmallDesktop: { minWidth: 769, maxWidth: 1024 },
+    isNormalDesktop: { minWidth: 1025, maxWidth: 1440 },
+    isWideDesktop: { minWidth: 1441 },
+    isDesktop: { minWidth: 769 },
+  },
 })
 
 export type AppConfig = typeof config
