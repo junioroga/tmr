@@ -1,4 +1,3 @@
-import React, { forwardRef } from 'react'
 import { NativeSyntheticEvent, TextInput, TextInputFocusEventData, View } from 'react-native'
 
 import Animated, {
@@ -11,6 +10,7 @@ import Animated, {
 
 import { YStack } from 'tamagui'
 
+import { forwardRef } from 'react'
 import { Input, InputProps } from '../Input'
 import { Text } from '../Text'
 
@@ -24,7 +24,7 @@ export type AnimatedInputProps = AnimatedProps<InputProps> & {
   onBlur: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void
 }
 
-export const AnimatedInput = forwardRef(
+export const AnimatedInput = forwardRef<TextInput, AnimatedInputProps>(
   (
     { error, label, value, entering, onFocus, onBlur, ...rest }: AnimatedInputProps,
     ref: React.LegacyRef<TextInput>

@@ -7,7 +7,7 @@ const ButtonFrame = styled(TButton, {
   br: '$3',
   bw: '$0.5',
   p: 0,
-  elevation: 3,
+  elevation: 0.5,
 
   variants: {
     variant: {

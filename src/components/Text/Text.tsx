@@ -1,4 +1,4 @@
-import { GetProps, styled, Text as TText } from 'tamagui'
+import { GetProps, Text as TText, styled } from 'tamagui'
 
 export const Text = styled(TText, {
   name: 'Text',

@@ -21,7 +21,7 @@ export const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) =>
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginHorizontal: 10,
+      marginHorizontal: tokens.space.$4.val,
       paddingVertical: tokens.space.$3.val,
       backgroundColor: theme.background.val,
       position: 'absolute',

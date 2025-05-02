@@ -3,8 +3,8 @@ import { FormProvider, useForm } from 'react-hook-form'
 import Animated, { FadeInUp } from 'react-native-reanimated'
 
 import { yupResolver } from '@hookform/resolvers/yup'
-import ProgressSteps, { Content } from '@joaosousa/react-native-progress-steps'
 
+import { Stepper } from '@/components'
 import { schema } from '@/schemas/FormSchema'
 import { useAppStore } from '@/store'
 import { Condition } from '@/utils/options'
@@ -72,45 +72,45 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
   return (
     <FormProvider {...formMethods}>
       <AnimatedStack entering={FadeInUp.delay(150).duration(150).springify()}>
-        <ProgressSteps
-          orientation="horizontal"
+        <Stepper
           currentStep={step}
           steps={[
             {
-              id: 0,
-              title: <></>,
-              content: <Content>{step === 0 ? <InitialStep setStep={setStep} /> : <></>}</Content>,
+              content: step === 0 ? <InitialStep setStep={setStep} /> : <></>,
             },
             {
-              id: 1,
-              title: <></>,
-              content: (
-                <Content>
-                  {step === 1 ? (
-                    <SecondStep setStep={setStep} handleSubmitForm={handleSubmit(onSubmit)} />
-                  ) : (
-                    <></>
-                  )}
-                </Content>
-              ),
+              content:
+                step === 1 ? (
+                  <SecondStep setStep={setStep} handleSubmitForm={handleSubmit(onSubmit)} />
+                ) : (
+                  <></>
+                ),
             },
             {
-              id: 2,
-              title: <></>,
-              content: <Content>{step === 2 ? <ResultStep setStep={setStep} /> : <></>}</Content>,
+              content: <ResultStep setStep={setStep} />,
             },
           ]}
           colors={{
             marker: {
+              circle: {
+                normal: 'transparent',
+                active: theme.primaryOrange20.val,
+                completed: theme.primaryPurple30.val,
+              },
+              borderCircle: {
+                normal: theme.primaryOrange40.val,
+                active: theme.primaryOrange80.val,
+                completed: theme.primaryPurple80.val,
+              },
               text: {
-                normal: theme.primaryPurple40.val,
-                active: theme.primaryPurple80.val,
+                normal: theme.primaryOrange40.val,
+                active: theme.primaryOrange80.val,
                 completed: theme.primaryPurple100.val,
               },
               line: {
-                normal: theme.primaryOrange20.val,
-                active: theme.primaryOrange50.val,
-                completed: theme.primaryOrange100.val,
+                normal: theme.primaryOrange40.val,
+                active: theme.primaryPurple80.val,
+                completed: theme.primaryPurple100.val,
               },
             },
           }}

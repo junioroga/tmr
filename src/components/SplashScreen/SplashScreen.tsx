@@ -8,10 +8,8 @@ import Animated, {
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
-  withDelay,
   withTiming,
 } from 'react-native-reanimated'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { H3, YStack, useTheme } from 'tamagui'
 import { LinearGradient } from 'tamagui/linear-gradient'
 import { Image } from '../Image'
@@ -23,55 +21,60 @@ type Props = {
   setIsReady: (value: boolean) => void
 }
 
+const SCALE_TARGET = 4
+const DURATION = 1000
+const DURATION_SCALE = 600
+const TRANSLATE_TARGET = 0
+
 export const SplashScreen = ({ setIsReady }: Props) => {
-  const insets = useSafeAreaInsets()
   const translateYImage = useSharedValue(-100)
   const translateYText = useSharedValue(100)
   const scaleImage = useSharedValue(1)
   const theme = useTheme()
 
-  const navigationToHome = () => {
-    setTimeout(() => setIsReady(true), 1800)
+  const handleNavigate = () => {
+    setTimeout(() => setIsReady(true), 300)
   }
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    translateYImage.value = withDelay(
-      700,
-      withTiming(0, {
-        duration: 700,
-        easing: Easing.linear,
-      })
-    )
+    translateYImage.value = withTiming(TRANSLATE_TARGET, {
+      duration: DURATION,
+      easing: Easing.out(Easing.exp),
+    })
 
-    translateYText.value = withDelay(
-      700,
-      withTiming(
-        5.5,
-        {
-          duration: 700,
+    translateYText.value = withTiming(
+      TRANSLATE_TARGET,
+      {
+        duration: DURATION,
+        easing: Easing.out(Easing.exp),
+      },
+      () => {
+        runOnJS(handleNavigate)()
+        scaleImage.value = withTiming(SCALE_TARGET, {
+          duration: DURATION_SCALE,
           easing: Easing.linear,
-        },
-        () => {
-          runOnJS(navigationToHome)()
-          scaleImage.value = withDelay(
-            1500,
-            withTiming(4, {
-              duration: 700,
-              easing: Easing.linear,
-            })
-          )
-        }
-      )
+        })
+      }
     )
-  }, [runOnJS, insets.bottom])
+  }, [scaleImage, setIsReady])
 
-  const animatedStackStyle = useAnimatedStyle(() => {
-    return {
-      opacity: interpolate(scaleImage.value, [1, 4], [1, 0], Extrapolation.CLAMP),
-      transform: [{ scale: scaleImage.value }],
-    }
-  })
+  const animatedStackStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(scaleImage.value, [1, 4], [1, 0], Extrapolation.CLAMP),
+    transform: [{ scale: scaleImage.value }],
+  }))
+
+  const animatedImageStyle = useAnimatedStyle(() => ({
+    height: 150,
+    width: 150,
+    transform: [{ translateY: translateYImage.value }],
+    opacity: interpolate(translateYImage.value, [-100, 0], [0, 1], Extrapolation.CLAMP),
+  }))
+
+  const animatedTextStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: translateYText.value }],
+    opacity: interpolate(translateYText.value, [100, 0], [0, 1], Extrapolation.CLAMP),
+  }))
 
   return (
     <LinearGradient
@@ -94,18 +97,12 @@ export const SplashScreen = ({ setIsReady }: Props) => {
         <Image
           entering={FadeIn.delay(300).duration(700)}
           source={require('../../assets/logo.png')}
-          style={{
-            height: 150,
-            width: 150,
-            transform: [{ translateY: translateYImage }],
-          }}
+          style={animatedImageStyle}
         />
         <AnimatedText
           col="$primaryPurple100"
           entering={FadeIn.delay(300).duration(700)}
-          style={{
-            transform: [{ translateY: translateYText }],
-          }}
+          style={animatedTextStyle}
         >
           TMR
         </AnimatedText>

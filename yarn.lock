@@ -3098,16 +3098,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@joaosousa/react-native-progress-steps@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@joaosousa/react-native-progress-steps@npm:0.4.0"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: 10c0/463d86baf8913fcb7687cdbf8dfef91386093ed07a39c5e9be49198e375a61a44747640a16b17216ace4c67285734cbd9ec21e3961c6ba1d8e21061d9fbe5d58
-  languageName: node
-  linkType: hard
-
 "@jridgewell/gen-mapping@npm:^0.3.2, @jridgewell/gen-mapping@npm:^0.3.5":
   version: 0.3.5
   resolution: "@jridgewell/gen-mapping@npm:0.3.5"
@@ -12849,12 +12839,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.51.5":
-  version: 7.51.5
-  resolution: "react-hook-form@npm:7.51.5"
+"react-hook-form@npm:^7.56.1":
+  version: 7.56.1
+  resolution: "react-hook-form@npm:7.56.1"
   peerDependencies:
-    react: ^16.8.0 || ^17 || ^18
-  checksum: 10c0/5b13f99a125d92ee618f2d4e218d5ec854f8cac1b568e83b4b125efb002cc79eef0f5c06b54015c78e16a830cf1ea356a646e8c6abb00b7ca8225dba9a92091e
+    react: ^16.8.0 || ^17 || ^18 || ^19
+  checksum: 10c0/26eafd54bf47167628e34c2f22ea27ea7bdd5b4231a56af5be31ccedfb2a721708b308026ea4a17f2fb15c7b5fff83c0feb4acc7aa07bd6faa8506e917810cab
   languageName: node
   linkType: hard
 
@@ -14530,7 +14520,6 @@ __metadata:
     "@expo-google-fonts/montserrat": "npm:^0.2.3"
     "@expo/vector-icons": "npm:^14.0.3"
     "@hookform/resolvers": "npm:^3.6.0"
-    "@joaosousa/react-native-progress-steps": "npm:^0.4.0"
     "@react-native-async-storage/async-storage": "npm:1.23.1"
     "@react-native-community/datetimepicker": "npm:8.2.0"
     "@react-navigation/bottom-tabs": "npm:^6.1.7"
@@ -14572,7 +14561,7 @@ __metadata:
     moti: "npm:^0.29.0"
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
-    react-hook-form: "npm:^7.51.5"
+    react-hook-form: "npm:^7.56.1"
     react-native: "npm:0.76.9"
     react-native-gesture-handler: "npm:~2.20.2"
     react-native-modal-datetime-picker: "npm:^17.1.0"

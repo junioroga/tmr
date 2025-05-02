@@ -83,7 +83,7 @@ export default function SecondStep({ setStep, handleSubmitForm }: Props) {
             onBlur={onBlur}
             onChangeText={(value) => onChange(maskDecimal(value))}
             value={value}
-            returnKeyType="done"
+            returnKeyType={condition !== Condition.FatFreeMass ? 'next' : 'done'}
             clearButtonMode="always"
             inputMode="numeric"
             error={error?.message}
@@ -145,7 +145,7 @@ export default function SecondStep({ setStep, handleSubmitForm }: Props) {
               onBlur={onBlur}
               onChangeText={(value) => onChange(maskDecimal(value))}
               value={value}
-              returnKeyType="done"
+              returnKeyType="next"
               clearButtonMode="always"
               inputMode="numeric"
               error={error?.message}

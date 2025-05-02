@@ -41,6 +41,7 @@ export const Dialog = ({ title, description, trigger, onConfirm }: Props) => (
         o={1}
         y={0}
         m="$4"
+        bw={0}
       >
         <YStack gap="$3">
           <AlertDialogTamagui.Title fontSize="$7" fontWeight="$7" col="$primaryPurple100">

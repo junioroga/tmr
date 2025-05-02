@@ -45,7 +45,7 @@ const InputText = styled(TInput, {
   },
 })
 
-export type InputProps = GetProps<typeof Input>
+export type InputProps = GetProps<typeof InputText>
 
 type ErrorProps = GetProps<typeof Text> & {
   error?: string
