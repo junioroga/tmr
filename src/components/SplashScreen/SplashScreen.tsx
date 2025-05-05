@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import Animated, {
   Easing,
   Extrapolation,
-  FadeIn,
   interpolate,
   runOnJS,
   useAnimatedStyle,
@@ -22,7 +21,7 @@ type Props = {
 }
 
 const SCALE_TARGET = 4
-const DURATION = 1000
+const DURATION = 1500
 const DURATION_SCALE = 600
 const TRANSLATE_TARGET = 0
 
@@ -94,16 +93,8 @@ export const SplashScreen = ({ setIsReady }: Props) => {
       r={0}
     >
       <AnimatedYStack f={1} ai="center" jc="center" style={animatedStackStyle}>
-        <Image
-          entering={FadeIn.delay(300).duration(700)}
-          source={require('../../assets/logo.png')}
-          style={animatedImageStyle}
-        />
-        <AnimatedText
-          col="$primaryPurple100"
-          entering={FadeIn.delay(300).duration(700)}
-          style={animatedTextStyle}
-        >
+        <Image source={require('../../assets/logo.png')} style={animatedImageStyle} />
+        <AnimatedText col="$primaryPurple100" style={animatedTextStyle}>
           TMR
         </AnimatedText>
       </AnimatedYStack>
