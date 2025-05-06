@@ -14,7 +14,8 @@
           "initialOrientation": "PORTRAIT"
         }
       ],
-      "./src/styles/custom-android-styles.js"
+      "./src/styles/custom-android-styles.js",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,

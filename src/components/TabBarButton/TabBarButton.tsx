@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Pressable, StyleSheet } from 'react-native'
 
-import { LabelPosition } from '@react-navigation/bottom-tabs/src/types'
 import Animated, {
   interpolate,
   useAnimatedStyle,
@@ -9,12 +8,13 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated'
 
-import { useTheme } from 'tamagui'
 import { Calculator, History, Settings } from '@tamagui/lucide-icons'
+import { useTheme } from 'tamagui'
 
 import { Text } from '../Text'
 
 const AnimatedText = Animated.createAnimatedComponent(Text)
+type LabelPosition = 'beside-icon' | 'below-icon'
 
 type Props = {
   onPress: () => void

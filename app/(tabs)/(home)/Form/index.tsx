@@ -94,7 +94,7 @@ export default function TMRForm({ onSubmit }: TMRFormProps) {
             marker: {
               circle: {
                 normal: 'transparent',
-                active: theme.primaryOrange20.val,
+                active: 'transparent',
                 completed: theme.primaryPurple30.val,
               },
               borderCircle: {
