@@ -4,8 +4,8 @@ import { format } from 'date-fns/format'
 import { View as MockView } from 'react-native'
 import Header from '../index'
 
-jest.mock('../../../../../components', () => ({
-  ...jest.requireActual('../../../../../components'),
+jest.mock('../../../../../src/components', () => ({
+  ...jest.requireActual('../../../../../src/components'),
   DatePicker: () => <MockView testID="date-picker-modal">Mock-View</MockView>,
 }))
 
