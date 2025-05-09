@@ -19,7 +19,8 @@
     ],
     "experiments": {
       "typedRoutes": true,
-      "tsconfigPaths": true
+      "tsconfigPaths": true,
+      "reactCanary": true
     },
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
