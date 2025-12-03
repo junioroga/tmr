@@ -21,7 +21,7 @@ The following tools were used to build the project:
 - [Tamagui](https://tamagui.dev/): Style and UI for React (web and native) meet an optimizing compiler
 - [Reanimated](https://docs.swmansion.com/react-native-reanimated/): React Native Reanimated is a powerful animation library built by Software Mansion.
 - [Expo Router](https://docs.expo.dev/versions/latest/sdk/router/): Routes and navigation
-- [Zunstand](https://legendapp.com/open-source/state/): Control all global states
+- [Zustand](https://legendapp.com/open-source/state/): Control all global states
 - [AsyncStorage](https://github.com/mrousavy/react-native-mmkv): The fastest key/value storage for React Native (using with Zustand to persist the application data).
 - [React Content Loader](https://github.com/danilowoz/react-content-loader): A SVG-Powered component to easily create placeholder loadings (like Facebook's cards loading).
 - [Jest](https://jestjs.io/): Jest is a delightful JavaScript Testing Framework with a focus on simplicity.
